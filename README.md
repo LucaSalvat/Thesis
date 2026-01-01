@@ -19,3 +19,7 @@ Basic example:
 \begin{document}
 % Your thesis content
 \end{document}
+```
+
+## License
+The license applied is the LPPL
