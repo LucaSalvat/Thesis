@@ -1,0 +1,15 @@
+\def\myc@CandidateLabel{Candidato}
+\def\myc@CandidateLabelFemale{Candidata}
+\def\myc@IDNumber{Matricola}
+
+\def\myc@SupervisorLabel{Relatore}
+\def\myc@SupervisorsLabel{Relatori}
+\def\myc@CoSupervisorLabel{Correlatore}
+\def\myc@CoSupervisorsLabel{Correlatori}
+
+\def\myc@CourseOf{Corso di Laurea}
+\def\myc@ChairOf{Cattedra}
+
+\def\myc@AcademicYear{Anno Accademico}
+
+
