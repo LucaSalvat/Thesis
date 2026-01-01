@@ -1,0 +1,60 @@
+% University Choose
+
+\def\th@uni{luiss} % Default One
+
+\DeclareOption{luiss}{\def\th@uni{luiss}}
+\DeclareOption{lumsa}{\def\th@uni{lumsa}} %example
+
+
+
+% Language Section ---------------------------------
+
+\def\th@lang{en}        % Default Langauge English
+
+% Extended Version
+\DeclareOption{lang=en}{\def\th@lang{en}}
+\DeclareOption{lang=it}{\def\th@lang{it}}
+\DeclareOption{lang=fr}{\def\th@lang{fr}}
+\DeclareOption{lang=de}{\def\th@lang{de}}
+
+
+
+% Compact Version
+\DeclareOption{english}{\def\th@lang{en}}
+\DeclareOption{italian}{\def\th@lang{it}}
+\DeclareOption{french}{\def\th@lang{fr}}
+\DeclareOption{german}{\def\th@lang{de}}
+
+
+
+% Type of Degree -----------------------------
+
+\newif\ifth@bachelor
+\newif\ifth@master
+\newif\ifth@phd
+
+\th@bachelortrue % default
+
+\DeclareOption{bachelor}{%
+  \th@bachelortrue
+  \th@masterfalse
+  \th@phdfalse
+}
+
+\DeclareOption{master}{%
+  \th@bachelorfalse
+  \th@mastertrue
+  \th@phdfalse
+}
+
+\DeclareOption{PhD}{%
+  \th@bachelorfalse
+  \th@masterfalse
+  \th@phdtrue
+}
+
+% Gender 
+
+\newif\ifth@female \th@femalefalse 
+
+
