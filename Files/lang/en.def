@@ -1,0 +1,13 @@
+\def\myc@CandidateLabel{Candidate}
+\def\myc@CandidateLabelFemale{Candidate}
+\def\myc@IDNumber{ID Number}
+
+\def\myc@SupervisorLabel{Supervisor}
+\def\myc@SupervisorsLabel{Supervisors}
+\def\myc@CoSupervisorLabel{Co-Supervisor}
+\def\myc@CoSupervisorsLabel{Co-Supervisors}
+
+\def\myc@CourseOf{Course of}
+\def\myc@ChairOf{Chair of}
+
+\def\myc@AcademicYear{Academic Year}
