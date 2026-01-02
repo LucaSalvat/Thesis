@@ -10,10 +10,10 @@
 % Defaults (internal state)
 % IMPORTANT: alignments stored as l/c/r, not words
 %--------------------------------------------------------
-\def\luiss@logo@pos{c}            % l|c|r
-\def\luiss@logo@width{0.35\textwidth}
+\def\luiss@logo@pos{l}            % l|c|r
+\def\luiss@logo@width{0.55\textwidth}
 
-\def\luiss@title@align{c}         % l|c|r
+\def\luiss@title@align{l}         % l|c|r
 \def\luiss@course@align{l}        % l|c|r
 \def\luiss@chair@align{l}         % l|c|r
 
@@ -72,12 +72,6 @@
 \define@key{luiss_front}{major}{\def\luiss@major{#1}}
 \define@key{luiss_front}{major-align}{\def\luiss@major@align{#1}}
 
-% % Optional: backward compatibility for misspelled keys
-% \define@key{luiss_front}{logo-allign}{\luiss@setalign{\luiss@logo@pos}{#1}}
-% \define@key{luiss_front}{title-allign}{\luiss@setalign{\luiss@title@align}{#1}}
-% \define@key{luiss_front}{course-allign}{\luiss@setalign{\luiss@course@align}{#1}}
-% \define@key{luiss_front}{chair-allign}{\luiss@setalign{\luiss@chair@align}{#1}}
-
 
 % Command for Front page Setting
 \newcommand{\LuissThesisController}[1]{%
@@ -93,12 +87,6 @@
 }
 
 % Multi-line material (titles, abstracts)
-% \newcommand{\luiss@alignedpar}[2]{%
-%   \makebox[\textwidth][#2]{%
-%     \parbox{0.9\textwidth}{#1}%
-%   }%
-% }
-
 \newcommand{\luiss@alignedpar}[2]{%
   \makebox[\textwidth][#2]{%
     \begin{minipage}{0.9\textwidth}%
@@ -121,18 +109,6 @@
 
 \newcommand{\subtitle@formatted}[1]{\SubtitleFont #1 \normalfont}
 
-%--------------------------------------------------------
-% Relative dimensions (your originals, unchanged)
-%--------------------------------------------------------
-% \newcommand{\HugeTitle}{\fontsize{2.0\baselineskip}{2.2\baselineskip}\selectfont}
-% \newcommand{\LargeBlock}{\fontsize{1.3\baselineskip}{1.6\baselineskip}\selectfont}
-% \newcommand{\SmallBlock}{\fontsize{0.9\baselineskip}{1.1\baselineskip}\selectfont}
-
-
-\newcommand{\TitleFont}{\fontsize{16}{20}\selectfont}
-\newcommand{\SubtitleFont}{\fontsize{14}{18}\selectfont}
-\newcommand{\LowerFont}{\fontsize{12}{14.5}\selectfont}
-
 
 %------------------------------------------------------
 %               FRONT PAGE (Bachelor)
@@ -152,7 +128,7 @@
     % top padding (relative to text block)
     %\vspace*{0.02\textheight}
 
-    %--------------- Logo ----------------
+%--------------- Logo ----------------
     \parbox{\textwidth}{%
       \luiss@aligned{%
         \includegraphics[width=\luiss@logo@width]{Files/formats/Logo/logoluissblue.pdf}%
@@ -160,7 +136,7 @@
     }%
 
     % Space between Logo and Degree/Chair
-    \vspace{0.04\textheight}
+    \vspace{0.1\textheight}
 
 %------------- Course and Chair --------------
     \parbox{0.9\textwidth}{%
@@ -182,7 +158,8 @@
 %---------------- Title ----------------
     \parbox{\textwidth}{%
       \luiss@alignedpar{%
-        \title@formatted{\th@title} \par \vspace{0.02\textwidth}
+        \title@formatted{\th@title} \par 
+        \vspace{0.02\textwidth}
         \subtitle@formatted{\th@subtitle}
         }{\luiss@title@align}%
     }%
@@ -192,23 +169,30 @@
 
 %------------- Names block (your structure) --------------
     \parbox{\textwidth}{%
-      \parbox[t]{0.45\textwidth}{\raggedright%
-        \th@Supervisor@label
-        \th@supervisors %
-      }%
-      \hfill
-      \parbox[t]{0.45\textwidth}{\raggedleft
-        \textbf{CANDIDATO}\\
-        Name Surname
-      }%
-    }%
-
-    \vfill
-
+  		\parbox[t]{0.33\textwidth}{% Supervisor
+  		\centering
+  		\setlength{\parskip}{4pt}
+    	\textbf{\th@Supervisor@label}\par
+  		\nointerlineskip
+  		\rule{0.33\textwidth}{0.2pt}\par
+  		\nointerlineskip
+  		\th@supervisors
+ 	 }%
+  	\parbox[t]{0.33\textwidth}{\hfill}% Empty Fill
+  	\parbox[t]{0.33\textwidth}{\centering
+  		\setlength{\parskip}{4pt}
+    	\textbf{\author@label}\par
+  		\nointerlineskip
+  		\rule{0.33\textwidth}{0.2pt}\par
+  		\nointerlineskip
+  		\th@candidate
+ 	 }%
+	}
+	\vfill
     %---------------- Footer ----------------
     \parbox{\textwidth}{\centering
-      \textbf{Anno Accademico}\\
-      2024--2025%
+      \textbf{\myc@AcademicYear}\par
+      \th@academicyear%
     }%
 
     % bottom padding

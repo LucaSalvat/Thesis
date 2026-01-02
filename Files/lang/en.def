@@ -11,3 +11,6 @@
 \def\myc@ChairOf{Chair of}
 
 \def\myc@AcademicYear{Academic Year}
+
+\def\myc@AbstractLabel{Abstract}
+\def\myc@AcknowledgmentsLabel{Acknowledgments}

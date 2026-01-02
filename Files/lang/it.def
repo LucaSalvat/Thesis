@@ -12,4 +12,5 @@
 
 \def\myc@AcademicYear{Anno Accademico}
 
-
+\def\myc@AbstractLabel{Sommario}
+\def\myc@AcknowledgmentsLabel{Ringraziamenti}

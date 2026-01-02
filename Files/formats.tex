@@ -2,6 +2,15 @@
 %Command Section Boolean for degree type ------------
 
 
+
+
+% ---------- Font Dimensions -----------------
+\newcommand{\TitleFont}{\fontsize{16}{20}\selectfont}
+\newcommand{\SubtitleFont}{\fontsize{14}{18}\selectfont}
+\newcommand{\LowerFont}{\fontsize{12}{14.5}\selectfont}
+
+
+
 % Front Page ------------
 
 \newcommand{\th@FrontPage}{%
@@ -16,25 +25,29 @@
   \fi\fi\fi
 }
 
-% Author Label -----------  Choose the sex of author
+% Author Label -----------  Choose the sex of the author
 
-\newcommand{\thesisgender}[1]{%
+\define@key{general_command}{gender}{%
   \def\temp{#1}%
+  \def\female{female}%
+  \def\male{male}%
   \ifx\temp\female
     \th@femaletrue
   \else\ifx\temp\male
     \th@femalefalse
   \else
-    \PackageError{thesis}{Invalid gender `#1`}{Use male or female.}%
+    \PackageError{thesis}{Invalid gender `#1`}{Use gender=male or gender=female}%
   \fi\fi
 }
 
-\newcommand{\authorlabel}{
-    \ifx\thesisgender \th@femaletrue 
+\newcommand{\author@label}{%
+  \ifth@female
     \myc@CandidateLabelFemale
-    \else
+  \else
     \myc@CandidateLabel
+  \fi
 }
+
 
 % Supervisor & CO-sup labels --------------  plural or singular of supervisor
 %\th@supervisor defined in meta
@@ -49,14 +62,14 @@
 }
 
 % Co-supervisor
-\newcommand{\th@Cosupervisor@label}{
-    \ifdefempty{\th@}{}{}
-    \ifnum\th@cosupervisorcount>1
-        \myc@CoSupervisorsLabel
-    \else
-        \myc@CoSupervisorLabel
-    \fi
-}
+%\newcommand{\th@Cosupervisor@label}{
+%    \ifdefempty{\th@}{}{}
+%    \ifnum\th@cosupervisorcount>1
+%        \myc@CoSupervisorsLabel
+%    \else
+%        \myc@CoSupervisorLabel
+%    \fi
+%}
 
 
 
@@ -73,13 +86,53 @@
 
 
 
-
-
-
-
+% General Command -----------------------
+\newcommand{\ThesisSettings}[1]{%
+  \setkeys{general_command}{#1}%
+}
 
 % this command is loaded and must be loaded in all the files
 \newcommand{\frontpage}{\th@FrontPage} 
+
+
+% Second page presentation
+
+
+
+% ===================== Environment Sections =======================
+
+% Dedication Section
+\providecommand{\dedication}[1]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \null\vspace{\stretch{0.26}}%
+  \begin{flushright}
+    \textit{#1}%
+  \end{flushright}%
+  \vspace{\stretch{0.74}}\null
+}
+
+% Abstract Section
+\renewenvironment{abstract}[1][\myc@AbstractLabel]{\cleardoublepage\thispagestyle{plain}
+\noindent{\SubtitleFont\bfseries #1}\par\vspace{0.5cm}\noindent\ignorespaces}
+{\null\ignorespacesafterend}
+
+
+\newenvironment{acknowledgments}[1][\myc@AcknowledgmentsLabel]
+{\cleardoublepage\thispagestyle{plain}
+\noindent{\SubtitleFont\bfseries #1}\par\vspace{0.5cm}\itshape\noindent\ignorespaces}
+{\null\ignorespacesafterend}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

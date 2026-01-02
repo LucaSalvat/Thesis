@@ -1,15 +1,15 @@
 % Definition Entries 
-\def\th@title{}
-\def\th@subtitle{}
-\def\th@candidate{}
+\def\th@title{[title]}
+\def\th@subtitle{[subtitle]}
+\def\th@candidate{[candidate]}
 \def\th@supervisors{}
 \def\th@cosupervisors{}
 \def\th@university{}
 \def\th@department{}
-\def\th@degree{}
-\def\th@chair{}
-\def\th@academicyear{}
-\def\th@IDnumber{}
+\def\th@degree{[Degree]}
+\def\th@chair{[Chair]}
+\def\th@academicyear{[20XX-20XX]}
+\def\th@IDnumber{[ID Number]}
 
 
 
@@ -56,13 +56,15 @@
 \newcount\th@supervisorcount
 \th@supervisorcount=0
 
+\gdef\th@supervisors{[supervisor]} % deafult value 
+
 \newcommand{\AddSupervisor}[1]{%
-    \advance\th@supervisorcount by 1
-    \ifnum\th@supervisorcount=1
-     \gdef\th@supervisors{#1}%
-     \else
-        \g@addto@macro\th@supervisors{\\#1}%
-    \fi
+  \advance\th@supervisorcount by 1\relax
+  \ifnum\th@supervisorcount=1
+    \gdef\th@supervisors{#1}% overwrite default
+  \else
+    \g@addto@macro\th@supervisors{\\#1}%
+  \fi
 }
 
 % Co-supervisors ----------- (Command to insert them)

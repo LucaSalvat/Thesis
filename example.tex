@@ -1,23 +1,41 @@
-\documentclass[a4paper,italian]{thesis}
+\documentclass[a4paper, twoside]{thesis}
 \usepackage{times}
 
-\AddSupervisor{Luca Salvatore}
-\AddSupervisor{Valerio Salvatore}
+%\candidate{Luca Salvatore}
+%\AddSupervisor{Valerio Salvatore}
+%\AddSupervisor{Luca Salvatore}
+%\AddSupervisor{Valerio Salvatore}
 
+\usepackage{lipsum}
+
+\ThesisSettings{gender = female}
 
 \LuissThesisController{%
-    title-align = c
+    %title-align = c
     %major = {Major: Finance},
     %logo-align = left
 }
 
+
+
 \degree{[Name Course]}
 \chair{[Name of Chair]}
 \thtitle{The aim of the international}
-\thsubtitle{Prova 1}
+\thsubtitle{subtitle}
 
 \begin{document}
 
 \frontpage
+
+\lipsum[1-4]
+
+
+
+
+\dedication{To me and myself}
+
+\begin{abstract}
+	\lipsum[1-4]
+\end{abstract}
 
 \end{document}
