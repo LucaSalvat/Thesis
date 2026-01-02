@@ -1,5 +1,22 @@
+\RequirePackage{iftex}
 
-%--------------------------------------------------------
+%\ifPDFTeX
+%  \RequirePackage{newtxtext}
+%  \RequirePackage{newtxmath}
+%\else
+%  \RequirePackage{fontspec}
+%  \IfFontExistsTF{Times New Roman}
+%    {\setmainfont{Times New Roman}}
+%    {\setmainfont{TeX Gyre Termes}}
+%\fi
+
+
+% Line spacing required by LUISS
+\RequirePackage{setspace}
+\onehalfspacing
+
+
+%-------------------------------------------------------
 % Error helper
 %--------------------------------------------------------
 \newcommand{\luiss@error}[2]{%
