@@ -99,12 +99,12 @@
 %--------------------------------------------------------
 % Generic aligned box helper
 %--------------------------------------------------------
-% Single-line material
+% Single-line material so block of text
 \newcommand{\luiss@aligned}[2]{%
   \makebox[\textwidth][#2]{#1}%
 }
 
-% Multi-line material (titles, abstracts)
+% Multi-line material (titles, abstracts) paragrpah block
 \newcommand{\luiss@alignedpar}[2]{%
   \makebox[\textwidth][#2]{%
     \begin{minipage}{\luiss@contentwidth}%
@@ -116,20 +116,20 @@
   }%
 }
 
-\newcommand{\luiss@logopath}{%
-  \ifx\th@logo\@empty
-    Files/formats/Logo/logoluissblue.pdf%
-  \else
-    \th@logo
+
+% -------------- Front page blocks --------------
+
+\newcommand{\luiss@setlogopath}{%set the logo path
+  \def\luiss@selectedlogo{Files/formats/Logo/logoluissblue.pdf}%
+  \ifx\th@logo\@empty\else
+    \edef\luiss@selectedlogo{\th@logo}%
   \fi
 }
-
-\newcommand{\luiss@logobox}{%
-  \parbox{\textwidth}{%
-    \luiss@aligned{%
-      \includegraphics[width=\luiss@logo@width]{\luiss@logopath}%
-    }{\luiss@logo@pos}%
-  }%
+\newcommand{\luiss@logobox}{% insert the logo
+  \luiss@setlogopath
+  \luiss@aligned{%
+    \includegraphics[width=\luiss@logo@width]{\luiss@selectedlogo}%
+  }{\luiss@logo@pos}%
 }
 
 \newcommand{\luiss@metadatafield}[3]{%
@@ -139,20 +139,23 @@
 }
 
 \newcommand{\luiss@titleblock}{%
-  \parbox{\textwidth}{%
+  %\parbox{\textwidth}{%
     \luiss@alignedpar{%
       \title@formatted{\th@title} \par
       \vspace{0.02\textwidth}
       \subtitle@formatted{\th@subtitle}%
     }{\luiss@title@align}%
-  }%
+  %}%
 }
 
-\newcommand{\luiss@namecolumn}[2]{%
+
+
+% TO EVALUTE THE NAME FUNCTION
+\newcommand{\luiss@namecolumn}[2]{% separate 2 entries with a line 
   \parbox[t]{0.33\textwidth}{%
     \centering
     \setlength{\parskip}{4pt}%
-    \textbf{#1}\par
+    \textbf{#1} \par
     \nointerlineskip
     \rule{0.33\textwidth}{0.2pt}\par
     \nointerlineskip
@@ -164,19 +167,48 @@
   \parbox[t]{0.33\textwidth}{\hfill}%
 }
 
-\newcommand{\luiss@namesblock}{%
-  \parbox{\textwidth}{%
-    \ifdefempty{\th@cosupervisors}{%
-      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-      \luiss@namespacer
-      \luiss@namecolumn{\author@label}{\th@candidate}%
-    }{%
-      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-      \luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
-      \luiss@namecolumn{\author@label}{\th@candidate}%
-    }%
-  }%
+
+\newcommand{\luiss@Author@Supervisor}{%Rendergin just Author and Supervisor
+	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+	\luiss@namespacer%
+	\luiss@namecolumn{\author@label}{\th@candidate}
 }
+
+\newcommand{\luiss@Author@Supervisor@CoSupervisor}{%Rendergin Author, Supervisor and Co-supervisor
+	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+	\luiss@namespacer%
+	\luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
+	\vspace{0.05\textheight}
+	\luiss@namespacer%
+	\luiss@namecolumn{\author@label}{\th@candidate}
+	\luiss@namespacer%
+}
+
+
+\newcommand{\luiss@namesblock}{%
+	\parbox{\textwidth}{%
+		\ifdefempty{\th@cosupervisors}{% In case Supervisor Undefined
+			\luiss@Author@Supervisor
+		}{% In case Supervisor Defined
+			\luiss@Author@Supervisor@CoSupervisor
+		}%	
+	}%
+}
+
+%\newcommand{\luiss@namesblock}{%
+%  \parbox{\textwidth}{%
+%    \ifdefempty{\th@cosupervisors}{%
+%      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+%      \luiss@namespacer
+%      \luiss@namecolumn{\author@label}{\th@candidate}%
+%    }{%
+%      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+%      \luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
+%      \luiss@namecolumn{\author@label}{\th@candidate}%
+%    }%
+%  }%
+%}
+
 %--------------------------------------------------------
 % Colors / formatting
 %--------------------------------------------------------
@@ -240,7 +272,7 @@
 
 %------------- Names block (your structure) --------------
     \luiss@namesblock
-	\vfill
+	\vspace{0.1\textheight}
     %---------------- Footer ----------------
     \parbox{\textwidth}{\centering
       \textbf{\myc@AcademicYear}\par
@@ -255,15 +287,20 @@
   \end{titlepage}%
 }
 
-%--------------------------------------------------------
-% Master / PhD placeholders (keep or expand)
-%--------------------------------------------------------
+%------------------------------------------------------
+%               FRONT PAGE (Master)
+%------------------------------------------------------
+
 \newcommand{\th@FrontPage@master}{%
   \begin{titlepage}
     Master Thesis\\
     Candidate: \myc@CandidateLabel
   \end{titlepage}%
 }
+
+%------------------------------------------------------
+%               FRONT PAGE (PhD)
+%------------------------------------------------------
 
 \newcommand{\th@FrontPage@phd}{%
   \begin{titlepage}
