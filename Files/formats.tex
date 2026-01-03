@@ -87,11 +87,19 @@
 }
 
 % this command is loaded and must be loaded in all the files
-\newcommand{\frontpage}{\th@FrontPage}
+\newcommand{\frontpage}{
+	%\begingroup
+	%\@twosidefalse
+	\th@FrontPage
+	%\endgroup
+}
 
 
 % Second page presentation
+\newcommand{\th@SecondPage}{
 
+
+}
 
 
 % ===================== Environment Sections =======================

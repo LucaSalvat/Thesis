@@ -149,8 +149,12 @@
 }
 
 
+% function for Candidate and Number ID 
+\newcommand{\luiss@IDandCandidate}{
+}
 
-% TO EVALUTE THE NAME FUNCTION
+
+
 \newcommand{\luiss@namecolumn}[2]{% separate 2 entries with a line 
   \parbox[t]{0.33\textwidth}{%
     \centering
@@ -164,14 +168,14 @@
 }
 
 \newcommand{\luiss@namespacer}{%
-  \parbox[t]{0.33\textwidth}{\hfill}%
+  \parbox[t]{0.34\textwidth}{\hfill}%
 }
 
 
 \newcommand{\luiss@Author@Supervisor}{%Rendergin just Author and Supervisor
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
 	\luiss@namespacer%
-	\luiss@namecolumn{\author@label}{\th@candidate}
+	\luiss@namecolumn{\author@label}{\th@candidate \\ \th@IDnumber}
 }
 
 \newcommand{\luiss@Author@Supervisor@CoSupervisor}{%Rendergin Author, Supervisor and Co-supervisor
@@ -180,7 +184,7 @@
 	\luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
 	\vspace{0.05\textheight}
 	\luiss@namespacer%
-	\luiss@namecolumn{\author@label}{\th@candidate}
+	\luiss@namecolumn{\author@label}{\th@candidate \par \th@IDnumber }
 	\luiss@namespacer%
 }
 
@@ -228,14 +232,15 @@
 
 \newcommand{\th@FrontPage@bachelor}{%
   \begin{titlepage}
-    \thispagestyle{empty}
+  
+  \thispagestyle{empty}
     %\sloppy
     \newgeometry{
-        left=3cm,
-        right=2.5cm,
-        top=3cm,
-        bottom=2.5cm
-    }
+  		inner=3cm,
+  		outer=3cm,
+  		top=3cm,
+  		bottom=2.5cm
+	}
 
     % top padding (relative to text block)
     %\vspace*{0.02\textheight}

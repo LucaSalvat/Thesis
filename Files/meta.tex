@@ -4,12 +4,12 @@
 \def\th@candidate{[candidate]}
 \def\th@supervisors{}
 \def\th@cosupervisors{}
-\def\th@university{}
-\def\th@department{}
+%\def\th@university{}
+\def\th@department{} % Not added
 \def\th@degree{[Degree]}
 \def\th@chair{[Chair]}
 \def\th@academicyear{[20XX-20XX]}
-\def\th@IDnumber{[ID Number]}
+\def\th@IDnumber{[ID Number]} % Not added
 
 
 
@@ -20,7 +20,7 @@
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
 \newcommand{\candidate}[1]{\gdef\th@candidate{#1}}
-\newcommand{\university}[1]{\gdef\th@university{#1}}
+%\newcommand{\university}[1]{\gdef\th@university{#1}}
 \newcommand{\department}[1]{\gdef\th@department{#1}}
 \newcommand{\chair}[1]{\gdef\th@chair{#1}}
 \newcommand{\degree}[1]{\gdef\th@degree{#1}}
@@ -79,6 +79,9 @@
   \gdef\th@supervisors{#1}%
   \advance\th@supervisorcount by 1\relax
 }
+
+ 
+
 
 % Co-supervisors ----------- (Command to insert them)
 \newcount\th@cosupervisorcount
