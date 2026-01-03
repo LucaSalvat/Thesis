@@ -155,32 +155,34 @@
 
 
 
-\newcommand{\luiss@namecolumn}[2]{% separate 2 entries with a line 
-  \parbox[t]{0.33\textwidth}{%
+\newcommand{\luiss@namecolumn}[2]{%
+  \parbox[t]{0.31\textwidth}{% 
     \centering
     \setlength{\parskip}{4pt}%
-    \textbf{#1} \par
+    \textbf{#1}\par
     \nointerlineskip
-    \rule{0.33\textwidth}{0.2pt}\par
+    \rule{0.31\textwidth}{0.2pt}\par % match column width
     \nointerlineskip
     #2%
   }%
 }
 
 \newcommand{\luiss@namespacer}{%
-  \parbox[t]{0.34\textwidth}{\hfill}%
+  \parbox[t]{0.33\textwidth}{\hfill}%
 }
 
 
 \newcommand{\luiss@Author@Supervisor}{%Rendergin just Author and Supervisor
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-	\luiss@namespacer%
+	%\luiss@namespacer%
+	\hfill
 	\luiss@namecolumn{\author@label}{\th@candidate \\ \th@IDnumber}
 }
 
 \newcommand{\luiss@Author@Supervisor@CoSupervisor}{%Rendergin Author, Supervisor and Co-supervisor
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-	\luiss@namespacer%
+	%\luiss@namespacer%
+	\hfill
 	\luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
 	\vspace{0.05\textheight}
 	\luiss@namespacer%
@@ -190,14 +192,17 @@
 
 
 \newcommand{\luiss@namesblock}{%
-	\parbox{\textwidth}{%
-		\ifdefempty{\th@cosupervisors}{% In case Supervisor Undefined
-			\luiss@Author@Supervisor
-		}{% In case Supervisor Defined
-			\luiss@Author@Supervisor@CoSupervisor
-		}%	
-	}%
+  \makebox[\textwidth][c]{% 
+    \parbox{\textwidth}{%
+      \ifdefempty{\th@cosupervisors}{%
+        \luiss@Author@Supervisor
+      }{%
+        \luiss@Author@Supervisor@CoSupervisor
+      }%
+    }%
+  }%
 }
+
 
 %\newcommand{\luiss@namesblock}{%
 %  \parbox{\textwidth}{%
@@ -234,13 +239,9 @@
   \begin{titlepage}
   
   \thispagestyle{empty}
-    %\sloppy
-    \newgeometry{
-  		inner=3cm,
-  		outer=3cm,
-  		top=3cm,
-  		bottom=2.5cm
-	}
+    \sloppy
+    \newgeometry{left=2.75cm, right=2.75cm, top=3cm, bottom=2.5cm}
+
 
     % top padding (relative to text block)
     %\vspace*{0.02\textheight}
