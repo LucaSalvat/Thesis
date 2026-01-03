@@ -156,7 +156,7 @@
 
 
 \newcommand{\luiss@namecolumn}[2]{%
-  \parbox[t]{0.31\textwidth}{% 
+  \parbox[t]{0.31\textwidth}{%
     \centering
     \setlength{\parskip}{4pt}%
     \textbf{#1}\par
@@ -173,6 +173,7 @@
 
 
 \newcommand{\luiss@Author@Supervisor}{%Rendergin just Author and Supervisor
+	\noindent
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
 	%\luiss@namespacer%
 	\hfill
@@ -192,31 +193,16 @@
 
 
 \newcommand{\luiss@namesblock}{%
-  \makebox[\textwidth][c]{% 
-    \parbox{\textwidth}{%
+  \makebox[\textwidth][c]{% center the whole block
+    \parbox{\luiss@contentwidth}{% use the same 0.9×textwidth as other fields
       \ifdefempty{\th@cosupervisors}{%
         \luiss@Author@Supervisor
       }{%
-        \luiss@Author@Supervisor@CoSupervisor
+      	\luiss@Author@Supervisor@CoSupervisor
       }%
     }%
   }%
 }
-
-
-%\newcommand{\luiss@namesblock}{%
-%  \parbox{\textwidth}{%
-%    \ifdefempty{\th@cosupervisors}{%
-%      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-%      \luiss@namespacer
-%      \luiss@namecolumn{\author@label}{\th@candidate}%
-%    }{%
-%      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-%      \luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
-%      \luiss@namecolumn{\author@label}{\th@candidate}%
-%    }%
-%  }%
-%}
 
 %--------------------------------------------------------
 % Colors / formatting
@@ -239,7 +225,7 @@
   \begin{titlepage}
   
   \thispagestyle{empty}
-    \sloppy
+    %\sloppy
     \newgeometry{left=2.75cm, right=2.75cm, top=3cm, bottom=2.5cm}
 
 
