@@ -33,6 +33,7 @@
 \def\luiss@title@align{l}         % l|c|r
 \def\luiss@course@align{l}        % l|c|r
 \def\luiss@chair@align{l}         % l|c|r
+\def\luiss@contentwidth{0.9\textwidth}
 
 \def\luiss@major{}                % optional text
 \def\luiss@major@align{l}
@@ -87,7 +88,7 @@
 \define@key{luiss_front}{chair-align}{\luiss@setalign{\luiss@chair@align}{#1}}
 
 \define@key{luiss_front}{major}{\def\luiss@major{#1}}
-\define@key{luiss_front}{major-align}{\def\luiss@major@align{#1}}
+\define@key{luiss_front}{major-align}{\luiss@setalign{\luiss@major@align}{#1}}
 
 
 % Command for Front page Setting
@@ -106,12 +107,74 @@
 % Multi-line material (titles, abstracts)
 \newcommand{\luiss@alignedpar}[2]{%
   \makebox[\textwidth][#2]{%
-    \begin{minipage}{0.9\textwidth}%
+    \begin{minipage}{\luiss@contentwidth}%
       \if#2l\raggedright\fi
       \if#2c\centering\fi
       \if#2r\raggedleft\fi
       #1%
     \end{minipage}%
+  }%
+}
+
+\newcommand{\luiss@logopath}{%
+  \ifx\th@logo\@empty
+    Files/formats/Logo/logoluissblue.pdf%
+  \else
+    \th@logo
+  \fi
+}
+
+\newcommand{\luiss@logobox}{%
+  \parbox{\textwidth}{%
+    \luiss@aligned{%
+      \includegraphics[width=\luiss@logo@width]{\luiss@logopath}%
+    }{\luiss@logo@pos}%
+  }%
+}
+
+\newcommand{\luiss@metadatafield}[3]{%
+  \parbox{\luiss@contentwidth}{%
+    #1~\luiss@alignedpar{#2}{#3}%
+  }%
+}
+
+\newcommand{\luiss@titleblock}{%
+  \parbox{\textwidth}{%
+    \luiss@alignedpar{%
+      \title@formatted{\th@title} \par
+      \vspace{0.02\textwidth}
+      \subtitle@formatted{\th@subtitle}%
+    }{\luiss@title@align}%
+  }%
+}
+
+\newcommand{\luiss@namecolumn}[2]{%
+  \parbox[t]{0.33\textwidth}{%
+    \centering
+    \setlength{\parskip}{4pt}%
+    \textbf{#1}\par
+    \nointerlineskip
+    \rule{0.33\textwidth}{0.2pt}\par
+    \nointerlineskip
+    #2%
+  }%
+}
+
+\newcommand{\luiss@namespacer}{%
+  \parbox[t]{0.33\textwidth}{\hfill}%
+}
+
+\newcommand{\luiss@namesblock}{%
+  \parbox{\textwidth}{%
+    \ifdefempty{\th@cosupervisors}{%
+      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+      \luiss@namespacer
+      \luiss@namecolumn{\author@label}{\th@candidate}%
+    }{%
+      \luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
+      \luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
+      \luiss@namecolumn{\author@label}{\th@candidate}%
+    }%
   }%
 }
 %--------------------------------------------------------
@@ -146,17 +209,14 @@
     %\vspace*{0.02\textheight}
 
 %--------------- Logo ----------------
-    \parbox{\textwidth}{%
-      \luiss@aligned{%
-        \includegraphics[width=\luiss@logo@width]{Files/formats/Logo/logoluissblue.pdf}%
-      }{\luiss@logo@pos}%      
-    }%
+    \luiss@logobox
+
 
     % Space between Logo and Degree/Chair
     \vspace{0.1\textheight}
 
 %------------- Course and Chair --------------
-    \parbox{0.9\textwidth}{%
+    \parbox{\luiss@contentwidth}{%
     \LowerFont
 % Course / Degree (align controlled)
       \myc@CourseOf~\luiss@aligned{\th@degree}{\luiss@course@align}\par%
@@ -165,7 +225,7 @@
       \else \luiss@aligned{\luiss@major}{\luiss@major@align}\fi
       \vspace*{0.02\textheight}
 % Chair (align controlled)
-      \myc@ChairOf~\luiss@alignedpar{\th@chair}{\luiss@chair@align}%
+      \luiss@metadatafield{\myc@ChairOf}{\th@chair}{\luiss@chair@align}%
     }%
     
  % Space between Chair block and Title ------
@@ -173,38 +233,13 @@
     \vfill
 
 %---------------- Title ----------------
-    \parbox{\textwidth}{%
-      \luiss@alignedpar{%
-        \title@formatted{\th@title} \par 
-        \vspace{0.02\textwidth}
-        \subtitle@formatted{\th@subtitle}
-        }{\luiss@title@align}%
-    }%
+    \luiss@titleblock
 
     % distribute remaining space
     \vfill
 
 %------------- Names block (your structure) --------------
-    \parbox{\textwidth}{%
-  		\parbox[t]{0.33\textwidth}{% Supervisor
-  		\centering
-  		\setlength{\parskip}{4pt}
-    	\textbf{\th@Supervisor@label}\par
-  		\nointerlineskip
-  		\rule{0.33\textwidth}{0.2pt}\par
-  		\nointerlineskip
-  		\th@supervisors
- 	 }%
-  	\parbox[t]{0.33\textwidth}{\hfill}% Empty Fill
-  	\parbox[t]{0.33\textwidth}{\centering
-  		\setlength{\parskip}{4pt}
-    	\textbf{\author@label}\par
-  		\nointerlineskip
-  		\rule{0.33\textwidth}{0.2pt}\par
-  		\nointerlineskip
-  		\th@candidate
- 	 }%
-	}
+    \luiss@namesblock
 	\vfill
     %---------------- Footer ----------------
     \parbox{\textwidth}{\centering
@@ -236,4 +271,3 @@
     Candidate: \myc@CandidateLabel
   \end{titlepage}%
 }
-

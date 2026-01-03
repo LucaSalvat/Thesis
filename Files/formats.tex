@@ -58,14 +58,13 @@
 }
 
 % Co-supervisor
-%\newcommand{\th@Cosupervisor@label}{
-%    \ifdefempty{\th@}{}{}
-%    \ifnum\th@cosupervisorcount>1
-%        \myc@CoSupervisorsLabel
-%    \else
-%        \myc@CoSupervisorLabel
-%    \fi
-%}
+\newcommand{\th@Cosupervisor@label}{%
+    \ifnum\th@cosupervisorcount>1
+        \myc@CoSupervisorsLabel
+    \else
+        \myc@CoSupervisorLabel
+    \fi
+}
 
 
 
@@ -88,7 +87,7 @@
 }
 
 % this command is loaded and must be loaded in all the files
-\newcommand{\frontpage}{\th@FrontPage} 
+\newcommand{\frontpage}{\th@FrontPage}
 
 
 % Second page presentation
@@ -118,7 +117,6 @@
 {\cleardoublepage\thispagestyle{plain}
 \noindent{\SubtitleFont\bfseries #1}\par\vspace{0.5cm}\itshape\noindent\ignorespaces}
 {\null\ignorespacesafterend}
-
 
 
 

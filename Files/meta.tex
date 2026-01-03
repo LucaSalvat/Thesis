@@ -20,8 +20,6 @@
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
 \newcommand{\candidate}[1]{\gdef\th@candidate{#1}}
-\newcommand{\supervisor}[1]{\th@supervisor{#1}}
-\newcommand{\supervisors}[1]{\th@supervisors{#1}}
 \newcommand{\university}[1]{\gdef\th@university{#1}}
 \newcommand{\department}[1]{\gdef\th@department{#1}}
 \newcommand{\chair}[1]{\gdef\th@chair{#1}}
@@ -35,11 +33,10 @@
 
 
 % User-facing aliases (case-insensitive helpers)
+\newcommand{\UniversityLogo}[1]{\universitylogo{#1}}
 \newcommand{\ThesisTitle}[1]{\thtitle{#1}}
 \newcommand{\ThesisSubtitle}[1]{\thsubtitle{#1}}
 \newcommand{\Candidate}[1]{\candidate{#1}}
-\newcommand{\Supervisor}[1]{\supervisor{#1}}
-\newcommand{\Supervisors}[1]{\supervisors{#1}}
 \newcommand{\Department}[1]{\department{#1}}
 \newcommand{\Degree}[1]{\degree{#1}}
 \newcommand{\Chair}[1]{\chair{#1}}
@@ -58,6 +55,11 @@
 
 \gdef\th@supervisors{[supervisor]} % deafult value 
 
+\newcommand{\th@reset@supervisors}{%
+  \gdef\th@supervisors{[supervisor]}%
+  \th@supervisorcount=0\relax
+}
+
 \newcommand{\AddSupervisor}[1]{%
   \advance\th@supervisorcount by 1\relax
   \ifnum\th@supervisorcount=1
@@ -67,9 +69,27 @@
   \fi
 }
 
+\newcommand{\supervisor}[1]{%
+  \th@reset@supervisors
+  \AddSupervisor{#1}%
+}
+
+\newcommand{\supervisors}[1]{%
+  \th@reset@supervisors
+  \gdef\th@supervisors{#1}%
+  \advance\th@supervisorcount by 1\relax
+}
+
 % Co-supervisors ----------- (Command to insert them)
 \newcount\th@cosupervisorcount
 \th@cosupervisorcount=0
+
+\gdef\th@cosupervisors{}%
+
+\newcommand{\th@reset@cosupervisors}{%
+  \gdef\th@cosupervisors{}%
+  \th@cosupervisorcount=0\relax
+}
 
 \newcommand{\AddCoSupervisor}[1]{%
     \advance\th@cosupervisorcount by 1
@@ -79,3 +99,20 @@
         \g@addto@macro\th@cosupervisors{\\#1}%
     \fi
 }
+
+\newcommand{\cosupervisor}[1]{%
+  \th@reset@cosupervisors
+  \AddCoSupervisor{#1}%
+}
+
+\newcommand{\cosupervisors}[1]{%
+  \th@reset@cosupervisors
+  \gdef\th@cosupervisors{#1}%
+  \advance\th@cosupervisorcount by 1\relax
+}
+
+% Co-supervisor aliases
+\newcommand{\CoSupervisor}[1]{\cosupervisor{#1}}
+\newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
+\newcommand{\Supervisor}[1]{\supervisor{#1}}
+\newcommand{\Supervisors}[1]{\supervisors{#1}}
