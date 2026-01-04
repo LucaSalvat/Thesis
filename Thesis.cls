@@ -54,13 +54,30 @@
 \RequirePackage{keyval}
 \RequirePackage{etoolbox}
 \RequirePackage{fancyhdr}
-\RequirePackage[dvipsnames]{xcolor}
+%\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{xcolor}
+
+% Include the Drop Cap letters
+\RequirePackage{type1cm}
+\RequirePackage{lettrine}
+%\renewcommand{\LettrineFontHook}{\color[gray]{0.3}}
+\setcounter{DefaultLines}{3}
+\renewcommand{\LettrineTextFont}{\normalfont}
+\renewcommand{\DefaultLoversize}{0.25}
+\renewcommand{\DefaultLhang}{0.25}
+
+% Betteries of Required packages ------
+\RequirePackage{amsmath}
 
 
 % load language strings (safe here)
 \input{Files/meta}
 \input{Files/lang}
 \input{Files/formats}
+
+
+
+
 
 
 

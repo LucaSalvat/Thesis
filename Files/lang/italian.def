@@ -15,6 +15,12 @@
 \def\myc@AbstractLabel{Sommario}
 \def\myc@AcknowledgmentsLabel{Ringraziamenti}
 
+
+% Thesis Discussion --------
+\def\myc@ThesisDiscussionBegin{La presente tesi è stata discussa in data}
+\def\myc@ThesisDiscussionFollowing{davanti a una commissione composta da:}
+\def\myc@NoDiscussion{La presente tesi non è stata ancora discussa.}
+
 % Copyrigths text ---------
 \def\myc@copyrights{%
 Ogni diritto relativo al presente elaborato è riservato all’autore. \par 

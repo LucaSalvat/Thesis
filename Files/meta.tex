@@ -1,4 +1,7 @@
-% Definition Entries 
+% ----------------------------------------------------
+% ----------------  Entries Definition ---- ---------
+% ----------------------------------------------------
+
 \def\th@title{[title]}
 \def\th@subtitle{[subtitle]}
 \def\th@candidate{[candidate]}
@@ -11,11 +14,21 @@
 \def\th@academicyear{[20XX-20XX]}
 \def\th@IDNumber{[ID Number]} % Not added
 
+% Copyright Section
 \def\th@Copyright@Year{}
+\def\th@ExamDate{}
+\def\th@AuthorEmail{}
 
-\def\th@logo{} % filename
+% Thesis discussion
+\def\th@DiscussionDate{}
+\def\th@SumbimttedDate{}
+\def\th@ExaminerProfessors{}
 
-% Command for rename the Metadata
+%\def\th@logo{} % filename
+
+% ----------------------------------------------------
+% -------  Command for renaming the Metadata ---------
+% ----------------------------------------------------
 
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
@@ -26,14 +39,23 @@
 \newcommand{\degree}[1]{\gdef\th@degree{#1}}
 \newcommand{\academicyear}[1]{\gdef\th@academicyear{#1}}
 \newcommand{\idnumber}[1]{\gdef\th@IDNumber{#1}}
+
+%Copyright Section ---------
+
 \newcommand{\copyyear}[1]{\gdef\th@Copyright@Year{#1}}
+\newcommand{\examdate}[1]{\gdef\th@ExamDate{#1}}
+\newcommand{\authoremail}[1]{\gdef\th@AuthorEmail{#1}}
+
+% Thesis discussion ------
+\newcommand{\discussiondate}[1]{\gdef\th@DiscussionDate{#1}}
+\newcommand{\sumbimttedsate}[1]{\gdef\th@SumbimttedDate{#1}}
+\newcommand{\examiner}[1]{\gdef\th@ExaminerProfessors{#1}}
 
 
+%\newcommand{\universitylogo}[1]{\gdef\th@logo{#1}}
 
-\newcommand{\universitylogo}[1]{\gdef\th@logo{#1}}
 
-
-% User-facing aliases (case-insensitive helpers)
+% User-facing aliases (case-insensitive helpers) --------------
 \newcommand{\UniversityLogo}[1]{\universitylogo{#1}}
 \newcommand{\ThesisTitle}[1]{\thtitle{#1}}
 \newcommand{\ThesisSubtitle}[1]{\thsubtitle{#1}}

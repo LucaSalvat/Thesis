@@ -97,29 +97,50 @@
 
 
 % Second page presentation ---------
-\newcommand{\th@Date}{
-\ifx\th@Copyright@Year\undefined\
-\else
+\newcommand{\Thesis@Discussion}{%
+\myc@ThesisDiscussionBegin \, \th@ExamDate \, \myc@ThesisDiscussionFollowing\linebreak%
+\th@ExaminerProfessors
 }
+\newcommand{\Thesis@NoDiscussion}{\myc@NoDiscussion}
+
+
+\newcommand{\@ExaminationCommission}{%
+\ifth@discussion
+    \Thesis@Discussion
+\else
+    \Thesis@NoDiscussion
+\fi
+}
+
+
+\newcommand{\@Copyrigth@Section}{%
+\textbf{\th@title}\linebreak
+\copyright~\th@Copyright@Year~\th@candidate\linebreak\linebreak
+
+\myc@copyrights\linebreak\linebreak
+%TODO: Add the type of thesis
+	
+\myc@AuthorCopyright\th@candidate\linebreak
+\myc@ContactCopyright \linebreak\linebreak
+\myc@AcknowledgmentsCopyrigth}
+
+
 
 \newcommand{\th@SecondPage}{%
 	\thispagestyle{empty}
-	Discussion
+	\makebox[0.8\textwidth][l]{%
+	\parbox{0.8\textwidth}{%
+	\raggedright
+	\@ExaminationCommission%
+	}}
 	\vfill
 	\noindent\rule{\textwidth}{0.4pt}\vspace{0.03\textheight}
-	\makebox[0.8\textwidth][c]{%
+	\makebox[0.8\textwidth][l]{%
 	\parbox{0.8\textwidth}{
 	\setlength{\parindent}{0pt}
 	\raggedright
-	\copyright~\th@Copyright@Year~\th@candidate\linebreak\linebreak
-	
-	\myc@copyrights\linebreak\linebreak
-	%TODO: Add the type of thesis
-	
-	\myc@AuthorCopyright\th@candidate\linebreak
-	\myc@ContactCopyright \linebreak\linebreak
-	\myc@AcknowledgmentsCopyrigth}
-}}
+	\@Copyrigth@Section}}
+}
 
 
 % ===================== Environment Sections =======================

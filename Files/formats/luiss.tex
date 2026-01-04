@@ -199,6 +199,9 @@
 %--------------------------------------------------------
 \definecolor{BlueLuiss}{RGB}{21,57,108}
 
+% Drop Cap Color
+\renewcommand{\LettrineFontHook}{\color{BlueLuiss}}
+
 % Example formatted title hook (optional)
 \newcommand{\title@formatted}[1]{%
   \TitleFont\bfseries\textcolor{BlueLuiss}{#1}\normalfont%
@@ -248,14 +251,11 @@
 
 
 %------------------------------------------------------
-%               FRONT PAGE (Master)
+%           FRONT PAGE (Master) same as bachelor
 %------------------------------------------------------
 
 \newcommand{\th@FrontPage@master}{%
-  \begin{titlepage}
-    Master Thesis\\
-    Candidate: \myc@CandidateLabel
-  \end{titlepage}%
+  \th@FrontPage@bachelor
 }
 
 %------------------------------------------------------
@@ -268,6 +268,7 @@
     Candidate: \myc@CandidateLabel
   \end{titlepage}%
 }
+
 
 
 
