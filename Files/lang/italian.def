@@ -1,0 +1,27 @@
+\def\myc@CandidateLabel{Candidato}
+\def\myc@CandidateLabelFemale{Candidata}
+\def\myc@IDNumber{Matricola}
+
+\def\myc@SupervisorLabel{Relatore}
+\def\myc@SupervisorsLabel{Relatori}
+\def\myc@CoSupervisorLabel{Correlatore}
+\def\myc@CoSupervisorsLabel{Correlatori}
+
+\def\myc@CourseOf{Corso di Laurea}
+\def\myc@ChairOf{Cattedra}
+
+\def\myc@AcademicYear{Anno Accademico}
+
+\def\myc@AbstractLabel{Sommario}
+\def\myc@AcknowledgmentsLabel{Ringraziamenti}
+
+% Copyrigths text ---------
+\def\myc@copyrights{%
+Ogni diritto relativo al presente elaborato è riservato all’autore. \par 
+La riproduzione o diffusione, anche parziale, è consentita esclusivamente nei limiti previsti dalla normativa vigente.
+}
+\def\myc@AuthorCopyright{Autore:}
+\def\myc@ContactCopyright{Contatto:}
+\def\myc@AcknowledgmentsCopyrigth{Elaborato redatto con \LaTeX{} mediante la classe \texttt{Thesis} di Luca Salvatore.}
+
+

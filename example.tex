@@ -1,4 +1,4 @@
-\documentclass[a4paper]{thesis}
+\documentclass[a4paper,12pt,twoside]{thesis}
 %\usepackage{times}
 
 %\candidate{Luca Salvatore}
@@ -8,44 +8,199 @@
 
 \usepackage{lipsum}
 
-\ThesisSettings{gender = female}
+%\geometry{showframe}
+
+\ThesisSettings{gender = male}
 
 \LuissThesisController{%
-    %title-align = c
+    %title-align = l,
     %major = {Major: Finance},
-    %logo-align = left
+    %logo-align = l
 }
 
 
 
-\degree{[Name Course]}
-\chair{[Name of Chair]}
-\thtitle{The aim of the international}
-\thsubtitle{subtitle}
+
+\degree{[Course Name]}
+\chair{[Chair Name]}
+
+\thtitle{Design and Presentation of a Custom Thesis Class for Student Guidance}
+\thsubtitle{A Demonstrative Thesis on Academic Structure and Support Tools}
+
+\candidate{[Name Surname]}
+\idnumber{[ID Number]}
+
+
+\supervisor{Supervisor 1}
+\AddSupervisor{Supervisor 2}
+
+\cosupervisor{Co-supervisor 1}
+\AddCoSupervisor{Co-Supervisor 2}
+
+\copyyear{[year for copyright]}
 
 \begin{document}
 
-\frontpage
 
-\lipsum[1-4]
+\frontpage 
+
+%\lipsum[1-4]
 
 
 
+\dedication{to my and myself}
 
-\dedication{To me and myself}
+\frontmatter
+\begin{abstractthesis}
+This thesis presents the design, structure, and rationale of a custom academic class developed to assist students throughout the thesis preparation process. The class aims to simplify thesis formatting, enforce consistent academic standards, and reduce technical barriers that often distract students from the intellectual content of their research.
 
-\begin{abstract}
-	\lipsum[1-4]
-\end{abstract}
+Rather than focusing on disciplinary research results, this work emphasizes clarity of presentation, robustness of structure, and usability for students across multiple fields of study. The proposed class provides predefined elements such as title pages, supervisory roles, chapter organization, and standardized formatting rules.
 
+The thesis is organized into three chapters. The first chapter introduces the motivation and context for the development of the class. The second chapter discusses its design principles and implementation strategy. The third chapter evaluates its pedagogical benefits and potential future extensions. The document concludes with final considerations and acknowledgments.
+This thesis is entirely original and released without copyright restrictions.
+\end{abstractthesis}
+
+\mainmatter
 \tableofcontents
 \clearpage
 
-\chapter{First definition of chapter}
-\lipsum[1-10]
 
 
-\chapter{Chapter 2}
-\lipsum[10-20]
+% Chapter 1
+
+\chapter{Introduction}
+
+\section{Context and Motivation}
+
+The preparation of an academic thesis represents a critical milestone in higher education. While students are expected to demonstrate independence and originality, they often encounter significant difficulties related to formatting, document structure, and compliance with institutional guidelines.
+
+These technical challenges can detract from the primary objective of a thesis: the development and communication of original ideas. The motivation for this work arises from the need to provide students with a structured and reliable framework that reduces such obstacles.
+
+\section{Objectives of the Thesis}
+
+The objectives of this thesis are:
+\begin{itemize}
+  \item To present a custom thesis class designed for student use
+  \item To explain its structural and pedagogical foundations
+  \item To demonstrate how standardized tools can improve clarity and consistency
+\end{itemize}
+
+\section{Scope and Structure}
+
+This thesis focuses on the conceptual design and presentation of the class rather than its deployment within a specific institution. The document is structured into three chapters, followed by conclusions and acknowledgments.
+
+\lipsum[1-20]
+% Chapter 2
+\chapter{Design of the Thesis Class}
+
+\section{Design Principles}
+
+The class is designed according to the following principles:
+\begin{itemize}
+  \item Robustness in all document contexts
+  \item Clarity through readable defaults and logical organization
+  \item Flexibility for different degree programs
+  \item Student-centered design that minimizes technical complexity
+\end{itemize}
+
+These principles ensure that students can focus on content rather than formatting.
+
+\section{Structural Components}
+
+The class provides predefined structures for:
+\begin{itemize}
+  \item Title pages including supervisor, co-supervisor, and degree chair
+  \item Abstract formatting
+  \item Chapter and section hierarchy
+  \item Consistent spacing and indentation rules
+\end{itemize}
+
+By encapsulating these elements, the class enforces academic standards while remaining transparent to the user.
+
+\section{Implementation Strategy}
+
+The implementation emphasizes modularity and clear documentation. Commands and environments are designed to be intuitive, allowing students with minimal technical background to adopt the class efficiently.
+
+% Chapter 3
+\chapter{Educational Impact and Evaluation}
+
+\section{Benefits for Students}
+
+The use of a dedicated thesis class offers several advantages:
+\begin{itemize}
+  \item Reduced formatting errors
+  \item Improved consistency across theses
+  \item Faster onboarding for new students
+  \item Increased confidence in document preparation
+\end{itemize}
+
+\section{Benefits for Faculty and Institutions}
+
+Supervisors, co-supervisors, and degree chairs benefit from standardized documents that simplify review and evaluation processes. Institutions may also achieve a more coherent visual and structural identity across submitted theses.
+
+\section{Future Developments}
+
+Potential extensions of the class include multilingual support, automated metadata generation, and integration with digital submission systems.
+
+\backmatter
+
+\chapter*{Conclusions}
+\addcontentsline{toc}{chapter}{Conclusions}
+
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+
+\begin{acknowledgements}
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+This thesis has presented a custom academic class designed to support students during the thesis preparation process. By emphasizing structure, robustness, and clarity, the class addresses common technical challenges while respecting academic conventions.
+
+The work demonstrates that well-designed tools can play a meaningful role in improving both the student experience and the overall quality of academic submissions.
+
+\end{acknowledgements}
 
 \end{document}
