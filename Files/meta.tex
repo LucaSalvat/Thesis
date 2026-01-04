@@ -1,62 +1,108 @@
-% ----------------------------------------------------
-% ----------------  Entries Definition ---- ---------
-% ----------------------------------------------------
+% ----------------------------------------------------------
+% 1) STORAGE (defaults are EMPTY so validation is reliable)
+% ----------------------------------------------------------
 
-\def\th@title{[title]}
-\def\th@subtitle{[subtitle]}
-\def\th@candidate{[candidate]}
-\def\th@supervisors{}
-\def\th@cosupervisors{}
-%\def\th@university{}
-\def\th@department{} % Not added
-\def\th@degree{[Degree]}
-\def\th@chair{[Chair]}
-\def\th@academicyear{[20XX-20XX]}
-\def\th@IDNumber{[ID Number]} % Not added
+\def\th@title{}
+\def\th@subtitle{}
+\def\th@candidate{}
+\def\th@department{}
+\def\th@degree{}
+\def\th@chair{}
+\def\th@academicyear{}
+\def\th@IDNumber{}
 
-% Copyright Section
+% Copyright / contacts
 \def\th@Copyright@Year{}
 \def\th@ExamDate{}
 \def\th@AuthorEmail{}
 
-% Thesis discussion
+% Discussion / defense
 \def\th@DiscussionDate{}
-\def\th@SumbimttedDate{}
+\def\th@SubmittedDate{} % fixed spelling
 \def\th@ExaminerProfessors{}
 
-%\def\th@logo{} % filename
-
-% ----------------------------------------------------
-% -------  Command for renaming the Metadata ---------
-% ----------------------------------------------------
+% ----------------------------------------------------------
+% 2) SETTERS (user API)
+% ----------------------------------------------------------
 
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
 \newcommand{\candidate}[1]{\gdef\th@candidate{#1}}
-%\newcommand{\university}[1]{\gdef\th@university{#1}}
 \newcommand{\department}[1]{\gdef\th@department{#1}}
-\newcommand{\chair}[1]{\gdef\th@chair{#1}}
 \newcommand{\degree}[1]{\gdef\th@degree{#1}}
+\newcommand{\chair}[1]{\gdef\th@chair{#1}}
 \newcommand{\academicyear}[1]{\gdef\th@academicyear{#1}}
 \newcommand{\idnumber}[1]{\gdef\th@IDNumber{#1}}
-
-%Copyright Section ---------
 
 \newcommand{\copyyear}[1]{\gdef\th@Copyright@Year{#1}}
 \newcommand{\examdate}[1]{\gdef\th@ExamDate{#1}}
 \newcommand{\authoremail}[1]{\gdef\th@AuthorEmail{#1}}
 
-% Thesis discussion ------
 \newcommand{\discussiondate}[1]{\gdef\th@DiscussionDate{#1}}
-\newcommand{\sumbimttedsate}[1]{\gdef\th@SumbimttedDate{#1}}
+\newcommand{\submitteddate}[1]{\gdef\th@SubmittedDate{#1}} % fixed, new canonical name
 \newcommand{\examiner}[1]{\gdef\th@ExaminerProfessors{#1}}
 
+% Backward-compatible typo alias (optional)
+\newcommand{\sumbimttedsate}[1]{\submitteddate{#1}} % keep old misspelling working
 
-%\newcommand{\universitylogo}[1]{\gdef\th@logo{#1}}
+% ----------------------------------------------------------
+% 3) SUPERVISORS / CO-SUPERVISORS (list logic)
+%    Store empty by default; build a line-broken list.
+% ----------------------------------------------------------
 
+\newcount\th@supervisorcount
+\th@supervisorcount=0
+\gdef\th@supervisors{}%
 
-% User-facing aliases (case-insensitive helpers) --------------
-\newcommand{\UniversityLogo}[1]{\universitylogo{#1}}
+\newcommand{\th@reset@supervisors}{%
+  \gdef\th@supervisors{}%
+  \th@supervisorcount=0\relax
+}
+\newcommand{\AddSupervisor}[1]{%
+  \advance\th@supervisorcount by 1\relax
+  \ifnum\th@supervisorcount=1
+    \gdef\th@supervisors{#1}%
+  \else
+    \g@addto@macro\th@supervisors{\\#1}%
+  \fi
+}
+\newcommand{\supervisor}[1]{%
+  \th@reset@supervisors
+  \AddSupervisor{#1}%
+}
+\newcommand{\supervisors}[1]{%
+  \th@reset@supervisors
+  \gdef\th@supervisors{#1}%
+  \advance\th@supervisorcount by 1\relax
+}
+
+\newcount\th@cosupervisorcount
+\th@cosupervisorcount=0
+\gdef\th@cosupervisors{}%
+
+\newcommand{\th@reset@cosupervisors}{%
+  \gdef\th@cosupervisors{}%
+  \th@cosupervisorcount=0\relax
+}
+\newcommand{\AddCoSupervisor}[1]{%
+  \advance\th@cosupervisorcount by 1\relax
+  \ifnum\th@cosupervisorcount=1
+    \gdef\th@cosupervisors{#1}%
+  \else
+    \g@addto@macro\th@cosupervisors{\\#1}%
+  \fi
+}
+\newcommand{\cosupervisor}[1]{%
+  \th@reset@cosupervisors
+  \AddCoSupervisor{#1}%
+}
+\newcommand{\cosupervisors}[1]{%
+  \th@reset@cosupervisors
+  \gdef\th@cosupervisors{#1}%
+  \advance\th@cosupervisorcount by 1\relax
+}
+
+% Case-friendly aliases (optional)
 \newcommand{\ThesisTitle}[1]{\thtitle{#1}}
 \newcommand{\ThesisSubtitle}[1]{\thsubtitle{#1}}
 \newcommand{\Candidate}[1]{\candidate{#1}}
@@ -65,80 +111,60 @@
 \newcommand{\Chair}[1]{\chair{#1}}
 \newcommand{\AcademicYear}[1]{\academicyear{#1}}
 \newcommand{\IDnumber}[1]{\idnumber{#1}}
-\newcommand{\University}[1]{\university{#1}}
+\newcommand{\Supervisor}[1]{\supervisor{#1}}
+\newcommand{\Supervisors}[1]{\supervisors{#1}}
+\newcommand{\CoSupervisor}[1]{\cosupervisor{#1}}
+\newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
+
+% IMPORTANT: remove/disable broken alias if \university is not implemented
+% \newcommand{\University}[1]{\university{#1}} % <- only if \university exists
 
 
+%------------------------------------------------------
+% -------- Error Cheks for entries --------------------
+%------------------------------------------------------
 
-
-% Additional Comands 
-
-% Supervisors --------- (Command to inser them)
-\newcount\th@supervisorcount
-\th@supervisorcount=0
-
-\gdef\th@supervisors{[supervisor]} % deafult value 
-
-\newcommand{\th@reset@supervisors}{%
-  \gdef\th@supervisors{[supervisor]}%
-  \th@supervisorcount=0\relax
+\newcommand{\th@error}[2]{%
+  \ClassError{thesis}{#1}{#2}%
 }
 
-\newcommand{\AddSupervisor}[1]{%
-  \advance\th@supervisorcount by 1\relax
-  \ifnum\th@supervisorcount=1
-    \gdef\th@supervisors{#1}% overwrite default
-  \else
-    \g@addto@macro\th@supervisors{\\#1}%
+% Required field checker: field macro + how to set it
+\newcommand{\th@require}[2]{%
+  \ifdefempty{#1}{%
+    \th@error
+      {Missing required thesis metadata: \string#1}%
+      {You must define it in the preamble.\MessageBreak
+       Example: #2}%
+  }{}%
+}
+
+% Conditional checker: only if a boolean is true
+% Usage: \th@require@if{\ifth@discussion}{\th@DiscussionDate}{\discussiondate{...}}
+\newcommand{\th@require@if}[3]{%
+  #1%
+    \th@require{#2}{#3}%
   \fi
 }
 
-\newcommand{\supervisor}[1]{%
-  \th@reset@supervisors
-  \AddSupervisor{#1}%
+
+
+\newcommand{\th@check@metadata}{%
+  % ---- Always required (edit to match your university) ----
+  \th@require{\th@title}{\thtitle{My Thesis Title}}%
+  \th@require{\th@candidate}{\candidate{Your Name}}%
+  \th@require{\th@degree}{\degree{Degree name}}%
+  \th@require{\th@academicyear}{\academicyear{20XX-20XX}}%
+
+  % Supervisors: if you want at least one supervisor required
+  \th@require{\th@supervisors}{\supervisor{Prof. Name}}%
+
+  % ---- Conditional: only if discussion option is enabled ----
+  \th@require@if{\ifth@discussion}{\th@DiscussionDate}{\discussiondate{29 October 2026}}%
+  \th@require@if{\ifth@discussion}{\th@ExaminerProfessors}{\examiner{Prof. A\\Prof. B}}%
 }
 
-\newcommand{\supervisors}[1]{%
-  \th@reset@supervisors
-  \gdef\th@supervisors{#1}%
-  \advance\th@supervisorcount by 1\relax
+\AtBeginDocument{%
+  \th@check@metadata
 }
 
- 
 
-
-% Co-supervisors ----------- (Command to insert them)
-\newcount\th@cosupervisorcount
-\th@cosupervisorcount=0
-
-\gdef\th@cosupervisors{}%
-
-\newcommand{\th@reset@cosupervisors}{%
-  \gdef\th@cosupervisors{}%
-  \th@cosupervisorcount=0\relax
-}
-
-\newcommand{\AddCoSupervisor}[1]{%
-    \advance\th@cosupervisorcount by 1
-    \ifnum\th@cosupervisorcount=1
-     \gdef\th@cosupervisors{#1}%
-     \else
-        \g@addto@macro\th@cosupervisors{\\#1}%
-    \fi
-}
-
-\newcommand{\cosupervisor}[1]{%
-  \th@reset@cosupervisors
-  \AddCoSupervisor{#1}%
-}
-
-\newcommand{\cosupervisors}[1]{%
-  \th@reset@cosupervisors
-  \gdef\th@cosupervisors{#1}%
-  \advance\th@cosupervisorcount by 1\relax
-}
-
-% Co-supervisor aliases
-\newcommand{\CoSupervisor}[1]{\cosupervisor{#1}}
-\newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
-\newcommand{\Supervisor}[1]{\supervisor{#1}}
-\newcommand{\Supervisors}[1]{\supervisors{#1}}
