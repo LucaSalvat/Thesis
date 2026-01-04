@@ -1,0 +1,26 @@
+\def\myc@CandidateLabel{Candidate}
+\def\myc@CandidateLabelFemale{Candidate}
+\def\myc@IDNumber{ID Number}
+
+\def\myc@SupervisorLabel{Supervisor}
+\def\myc@SupervisorsLabel{Supervisors}
+\def\myc@CoSupervisorLabel{Co-Supervisor}
+\def\myc@CoSupervisorsLabel{Co-Supervisors}
+
+\def\myc@CourseOf{Course of}
+\def\myc@ChairOf{Chair of}
+
+\def\myc@AcademicYear{Academic Year}
+
+\def\myc@AbstractLabel{Abstract}
+\def\myc@AcknowledgmentsLabel{Acknowledgments}
+
+
+% Copyrigths text ---------
+\def\myc@copyrights{%
+All rights relating to this work are reserved to the author. \linebreak%
+No part of this thesis may be reproduced or distributed, in whole or in part, except as permitted by applicable law.}
+\def\myc@AuthorCopyright{Author:}
+\def\myc@ContactCopyright{Contact:}
+\def\myc@AcknowledgmentsCopyrigth{Thesis prepared through \LaTeX{} with the class \texttt{Thesis} by Luca Salvatore.}
+

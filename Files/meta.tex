@@ -9,9 +9,9 @@
 \def\th@degree{[Degree]}
 \def\th@chair{[Chair]}
 \def\th@academicyear{[20XX-20XX]}
-\def\th@IDnumber{[ID Number]} % Not added
+\def\th@IDNumber{[ID Number]} % Not added
 
-
+\def\th@Copyright@Year{}
 
 \def\th@logo{} % filename
 
@@ -25,7 +25,8 @@
 \newcommand{\chair}[1]{\gdef\th@chair{#1}}
 \newcommand{\degree}[1]{\gdef\th@degree{#1}}
 \newcommand{\academicyear}[1]{\gdef\th@academicyear{#1}}
-\newcommand{\idnumber}[1]{\gdef\th@IDnumber{#1}}
+\newcommand{\idnumber}[1]{\gdef\th@IDNumber{#1}}
+\newcommand{\copyyear}[1]{\gdef\th@Copyright@Year{#1}}
 
 
 

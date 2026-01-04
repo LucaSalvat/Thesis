@@ -26,10 +26,27 @@
 
 \LoadClass{book}
 
+\RequirePackage{iftex}
 
-\RequirePackage[T1]{fontenc}   % proper accented glyphs, hyphenation
-\RequirePackage[utf8]{inputenc}% UTF-8 source (harmless on new LaTeX)
-\RequirePackage{lmodern}       % scalable Latin Modern fonts
+% pdfTeX -> babel
+%\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{lmodern}
+  \RequirePackage[\th@lang]{babel}
+
+% XeTeX/LuaTeX -> polyglossia
+%\else
+%  \RequirePackage{fontspec} % strongly recommended with polyglossia
+%  \RequirePackage{polyglossia}
+%  \setmainlanguage{\th@lang}
+%
+%  % Optional: keep a similar look to lmodern
+%  \setmainfont{Latin Modern Roman}
+%  \setsansfont{Latin Modern Sans}
+%  \setmonofont{Latin Modern Mono}
+%\fi
+
 \RequirePackage{graphicx}
 \RequirePackage{geometry}
 \RequirePackage{expl3}

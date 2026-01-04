@@ -1,72 +1,50 @@
+% Package requirements -----
 \RequirePackage{iftex}
 
-%\ifPDFTeX
-%  \RequirePackage{newtxtext}
-%  \RequirePackage{newtxmath}
-%\else
-%  \RequirePackage{fontspec}
-%  \IfFontExistsTF{Times New Roman}
-%    {\setmainfont{Times New Roman}}
-%    {\setmainfont{TeX Gyre Termes}}
-%\fi
 
+%--------------------------------------------
+% ------------- Internal Definitions --------
+%--------------------------------------------
 
-% Line spacing required by LUISS
-\RequirePackage{setspace}
-\onehalfspacing
+%------------ Alignment General Variables ----
 
-
-%-------------------------------------------------------
-% Error helper
-%--------------------------------------------------------
-\newcommand{\luiss@error}[2]{%
-  \PackageError{luiss-thesis}{#1}{#2}%
-}
-
-%--------------------------------------------------------
-% Defaults (internal state)
-% IMPORTANT: alignments stored as l/c/r, not words
-%--------------------------------------------------------
-\def\luiss@logo@pos{l}            % l|c|r
-\def\luiss@logo@width{0.55\textwidth}
-
-\def\luiss@title@align{l}         % l|c|r
-\def\luiss@course@align{l}        % l|c|r
-\def\luiss@chair@align{l}         % l|c|r
-\def\luiss@contentwidth{0.9\textwidth}
-
-\def\luiss@major{}                % optional text
-\def\luiss@major@align{l}
-
-%--------------------------------------------------------
-% Alignment mapping table
-% Accept: left/center/right and also l/c/r
-%--------------------------------------------------------
+		% Single Key 
 \def\luiss@align@left{l}
 \def\luiss@align@center{c}
 \def\luiss@align@right{r}
 
+		% Full word key
 \def\luiss@align@l{l}
 \def\luiss@align@c{c}
 \def\luiss@align@r{r}
 
-%--------------------------------------------------------
-% Set alignment macro #1 based on user value #2
-% If invalid -> error + fallback to left
-%--------------------------------------------------------
-% \newcommand{\luiss@setalign}[2]{%
-%   \@ifundefined{luiss@align@#2}{%
-%     \luiss@error{Invalid alignment '#2'}%
-%       {Use left, center, right (or l, c, r). Falling back to left.}%
-%     \def#1{l}%
-%   }{%
-%     \edef#1{\csname luiss@align@#2\endcsname}%
-%   }%
-% }
+		% Map of text alignment
+\def\luiss@textalign@l{\raggedright}
+\def\luiss@textalign@c{\centering}
+\def\luiss@textalign@r{\raggedleft}
+
+% Blocks of front page 
+
+\def\luiss@logo@pos{l}            				% Position of the Logo
+\def\luiss@logo@width{0.55\textwidth}			% Width of the Logo
+
+\def\luiss@title@align{l}         				% Alignment of title block	
+	
+\def\luiss@course@align{l}        				% Alignment of the Course
+%\def\luiss@chair@align{l}         				% Alignment of the Chair %TODO: merge allignemtn of chair and course
+	
+
+\def\luiss@major{}                				% Major Stire
+\def\luiss@major@align{l}						% Major  
+
+\def\luiss@contentwidth{0.9\textwidth}			% Content width to understand
 
 
-\newcommand{\luiss@setalign}[2]{%
-  % remove spaces from value
+
+
+% -------- Macro Setting the alignment value -----------
+
+\newcommand{\luiss@setalign}[2]{%				% Strip all the value to have l/c/r
   \edef\luiss@tmp{\zap@space#2 \@empty}%
   \@ifundefined{luiss@align@\luiss@tmp}{%
     \luiss@error{Invalid alignment '\luiss@tmp'}%
@@ -77,85 +55,52 @@
   }%
 }
 
-%--------------------------------------------------------
-% Public controller (key=value)
-%--------------------------------------------------------
+	
+\newcommand{\luiss@applytextalign}[1]{%			% Set the orientation ot text given l/c/r
+  \csname luiss@textalign@#1\endcsname
+}
+
+% -------- Public Controller of keys (Luiss key = value) -------
+
 \define@key{luiss_front}{logo-align}{\luiss@setalign{\luiss@logo@pos}{#1}}
 \define@key{luiss_front}{logo-width}{\def\luiss@logo@width{#1}}
 
 \define@key{luiss_front}{title-align}{\luiss@setalign{\luiss@title@align}{#1}}
 \define@key{luiss_front}{course-align}{\luiss@setalign{\luiss@course@align}{#1}}
-\define@key{luiss_front}{chair-align}{\luiss@setalign{\luiss@chair@align}{#1}}
+%\define@key{luiss_front}{chair-align}{\luiss@setalign{\luiss@chair@align}{#1}}
 
 \define@key{luiss_front}{major}{\def\luiss@major{#1}}
 \define@key{luiss_front}{major-align}{\luiss@setalign{\luiss@major@align}{#1}}
 
 
-% Command for Front page Setting
+% General Command Luiss Definition 
 \newcommand{\LuissThesisController}[1]{%
   \setkeys{luiss_front}{#1}%
 }
 
-%--------------------------------------------------------
-% Generic aligned box helper
-%--------------------------------------------------------
-% Single-line material so block of text
+
+%--------------------------------------------
+% ------------- Blocks Section --------------
+%--------------------------------------------
+
+% --------- Elementar Block definiton ---------
 \newcommand{\luiss@aligned}[2]{%
   \makebox[\textwidth][#2]{#1}%
 }
 
-% Multi-line material (titles, abstracts) paragrpah block
-\newcommand{\luiss@alignedpar}[2]{%
-  \makebox[\textwidth][#2]{%
+% \luiss@alignedpar[<box width>]{<content>}{<l|c|r>}
+% If <box width> is omitted -> defaults to \textwidth
+\newcommand{\luiss@alignedpar}[3][\textwidth]{%
+  \makebox[#1][#3]{%
     \begin{minipage}{\luiss@contentwidth}%
-      \if#2l\raggedright\fi
-      \if#2c\centering\fi
-      \if#2r\raggedleft\fi
-      #1%
+      \luiss@applytextalign{#3}%
+      #2%
     \end{minipage}%
   }%
 }
 
 
-% -------------- Front page blocks --------------
-
-\newcommand{\luiss@setlogopath}{%set the logo path
-  \def\luiss@selectedlogo{Files/formats/Logo/logoluissblue.pdf}%
-  \ifx\th@logo\@empty\else
-    \edef\luiss@selectedlogo{\th@logo}%
-  \fi
-}
-\newcommand{\luiss@logobox}{% insert the logo
-  \luiss@setlogopath
-  \luiss@aligned{%
-    \includegraphics[width=\luiss@logo@width]{\luiss@selectedlogo}%
-  }{\luiss@logo@pos}%
-}
-
-\newcommand{\luiss@metadatafield}[3]{%
-  \parbox{\luiss@contentwidth}{%
-    #1~\luiss@alignedpar{#2}{#3}%
-  }%
-}
-
-\newcommand{\luiss@titleblock}{%
-  %\parbox{\textwidth}{%
-    \luiss@alignedpar{%
-      \title@formatted{\th@title} \par
-      \vspace{0.02\textwidth}
-      \subtitle@formatted{\th@subtitle}%
-    }{\luiss@title@align}%
-  %}%
-}
-
-
-% function for Candidate and Number ID 
-\newcommand{\luiss@IDandCandidate}{
-}
-
-
-
-\newcommand{\luiss@namecolumn}[2]{%
+\newcommand{\luiss@namecolumn}[2]{%				% Zone with two entreis and the line in the middle
   \parbox[t]{0.31\textwidth}{%
     \centering
     \setlength{\parskip}{4pt}%
@@ -167,34 +112,78 @@
   }%
 }
 
-\newcommand{\luiss@namespacer}{%
-  \parbox[t]{0.33\textwidth}{\hfill}%
+% ---------- Definition of Blocks -----------
+
+
+% Logo Box ----- 
+\newcommand{\luiss@logobox}{% insert the logo
+\noindent
+  \luiss@aligned{%
+    \includegraphics[width=\luiss@logo@width]{Files/formats/Logo/logoluissblue.pdf}%
+  }{\luiss@logo@pos}%
+}
+
+% Title Box ----- 
+\newcommand{\luiss@titleblock}{%
+	\noindent
+	\luiss@alignedpar{%
+		\title@formatted{\th@title}
+		\par \vspace{0.02\textwidth}
+		\subtitle@formatted{\th@subtitle}
+    }{\luiss@title@align}%
+}
+
+% Chair and Degree Box -----
+\newcommand{\luiss@major@optional}{
+\ifx\luiss@major\@empty
+\else\luiss@aligned{\luiss@major}{\luiss@major@align}\fi
+}
+
+\newcommand{\luiss@Degree@Chair}{%
+	\noindent
+	\luiss@alignedpar{%
+		\LowerFont 
+		\myc@CourseOf~\th@degree\par
+		\luiss@major@optional
+		\vspace*{0.02\textheight}
+		\myc@ChairOf~\th@chair
+	}{\luiss@course@align}
 }
 
 
-\newcommand{\luiss@Author@Supervisor}{%Rendergin just Author and Supervisor
+
+% Name Block ------
+
+
+\newcommand{\luiss@Author@Supervisor}{%								% Author and Supervisor
 	\noindent
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-	%\luiss@namespacer%
 	\hfill
-	\luiss@namecolumn{\author@label}{\th@candidate \\ \th@IDnumber}
+	\luiss@namecolumn{\author@label}{\th@candidate\linebreak\th@IDNumber}
 }
 
-\newcommand{\luiss@Author@Supervisor@CoSupervisor}{%Rendergin Author, Supervisor and Co-supervisor
+\newcommand{\luiss@Author@Supervisor@CoSupervisor}{%					% Author, Supervisor, and Co-supervisor
+	\noindent
+	% Top Block Supervisor and Co-Supervisor	
 	\luiss@namecolumn{\th@Supervisor@label}{\th@supervisors}%
-	%\luiss@namespacer%
 	\hfill
 	\luiss@namecolumn{\th@Cosupervisor@label}{\th@cosupervisors}%
+	
 	\vspace{0.05\textheight}
-	\luiss@namespacer%
-	\luiss@namecolumn{\author@label}{\th@candidate \par \th@IDnumber }
-	\luiss@namespacer%
+	
+	% Bottom Block Author
+	\begin{center}
+	\luiss@namecolumn{\author@label}{\th@candidate\linebreak\th@IDNumber }
+	\end{center}
 }
 
 
+ %Review from here
+ 
 \newcommand{\luiss@namesblock}{%
-  \makebox[\textwidth][c]{% center the whole block
-    \parbox{\luiss@contentwidth}{% use the same 0.9×textwidth as other fields
+	\noindent
+	\makebox[\textwidth][c]{% center the whole block
+    \parbox{\textwidth}{%
       \ifdefempty{\th@cosupervisors}{%
         \luiss@Author@Supervisor
       }{%
@@ -204,6 +193,7 @@
   }%
 }
 
+
 %--------------------------------------------------------
 % Colors / formatting
 %--------------------------------------------------------
@@ -211,73 +201,51 @@
 
 % Example formatted title hook (optional)
 \newcommand{\title@formatted}[1]{%
-  \TitleFont \bfseries \textcolor{BlueLuiss}{#1} \normalfont %
+  \TitleFont\bfseries\textcolor{BlueLuiss}{#1}\normalfont%
 }
 
 \newcommand{\subtitle@formatted}[1]{\SubtitleFont #1 \normalfont}
 
-
 %------------------------------------------------------
 %               FRONT PAGE (Bachelor)
 %------------------------------------------------------
-
 \newcommand{\th@FrontPage@bachelor}{%
-  \begin{titlepage}
-  
-  \thispagestyle{empty}
-    %\sloppy
-    \newgeometry{left=2.75cm, right=2.75cm, top=3cm, bottom=2.5cm}
-
-
-    % top padding (relative to text block)
-    %\vspace*{0.02\textheight}
-
-%--------------- Logo ----------------
-    \luiss@logobox
-
-
-    % Space between Logo and Degree/Chair
-    \vspace{0.1\textheight}
-
-%------------- Course and Chair --------------
-    \parbox{\luiss@contentwidth}{%
-    \LowerFont
-% Course / Degree (align controlled)
-      \myc@CourseOf~\luiss@aligned{\th@degree}{\luiss@course@align}\par%
-% Major (optional)
-      \ifx\luiss@major\@empty 
-      \else \luiss@aligned{\luiss@major}{\luiss@major@align}\fi
-      \vspace*{0.02\textheight}
-% Chair (align controlled)
-      \luiss@metadatafield{\myc@ChairOf}{\th@chair}{\luiss@chair@align}%
-    }%
-    
- % Space between Chair block and Title ------
-    %\vspace{0.06\textheight}
-    \vfill
-
-%---------------- Title ----------------
-    \luiss@titleblock
-
-    % distribute remaining space
-    \vfill
-
-%------------- Names block (your structure) --------------
-    \luiss@namesblock
+\begin{titlepage}
+%General Settings starts
+	\thispagestyle{empty}
+	\newgeometry{left=2.75cm, right=2.75cm, top=3cm, bottom=2.5cm}
+	
+	%Logo Box -------------------
+	\luiss@logobox
+	\vspace{0.1\textheight}												
+	
+	% Chair and course box ------
+	\luiss@Degree@Chair
+	
+	\vfill
+	% Title box ---------------
+	\luiss@titleblock
+	\vfill
+	
+	% Names block ------------
+	\luiss@namesblock
 	\vspace{0.1\textheight}
-    %---------------- Footer ----------------
-    \parbox{\textwidth}{\centering
+	
+	% Academic year footer ----
+	\noindent
+	\parbox[c]{\textwidth}{\centering%
       \textbf{\myc@AcademicYear}\par
       \th@academicyear%
     }%
-
-    % bottom padding
-    \vspace*{0.05\textheight}
-
-    % ----------- Geometry Reset (margins reset ) ----------
-    \restoregeometry
-  \end{titlepage}%
+	
+	
+	\vspace*{0.05\textheight}	% bottom padding
+	
+%General Settings ends
+	\restoregeometry
+\end{titlepage}
 }
+
 
 %------------------------------------------------------
 %               FRONT PAGE (Master)
@@ -300,3 +268,14 @@
     Candidate: \myc@CandidateLabel
   \end{titlepage}%
 }
+
+
+
+
+
+
+
+
+
+
+
