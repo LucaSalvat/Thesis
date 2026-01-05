@@ -1,4 +1,4 @@
-# LaTeX Thesis Class
+# LaTeX academicthesis Class
 
 A **scalable and modular LaTeX class** for university theses, designed to support multiple academic levels (**Bachelor, Master, PhD**) and to be easily customizable for different universities, layouts, and languages.
 
@@ -19,7 +19,7 @@ Installation instructions will be provided once the project reaches a stable rel
 Basic example:
 
 ```tex
-\documentclass{thesis}
+\documentclass{academicthesis}
 \begin{document}
 % Your thesis content
 \end{document}
@@ -30,12 +30,12 @@ Basic example:
 The license applied is the LPPL
 
 ## Repository Structure
-The class is defined in the main file `Thesis.cls`, which loads all the components required for proper functionality.
+The class is defined in the main file `academicthesis.cls`, which loads all the components required for proper functionality.
 Supporting files are organized within the `Files/ directory`, which contains the core infrastructure of the class.
 
 ### Core files
 
-- `Thesis.cls`  
+- `academicthesis.cls`  
   Main class file.
 
 - `Files/options.tex`  
