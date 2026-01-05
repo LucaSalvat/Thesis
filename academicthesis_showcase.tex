@@ -1,0 +1,131 @@
+\documentclass[luiss,english]{academicthesis}
+
+\usepackage{lipsum} %Dummy package
+
+% ------------------------------------------------
+% Metadata (demonstrates your API)
+% ------------------------------------------------
+\thtitle{A Demonstration of the \texttt{academicthesis} Class}
+\thsubtitle{Design, Structure, and Extensibility}
+
+\candidate{John Doe}
+\degree{Bachelor of Science in Computer Science}
+\chair{Economics and Data Policy}
+\academicyear{2025--2026}
+\idnumber{123456}
+
+\supervisor{Prof.\ Alice Smith}
+\cosupervisor{Prof.\ Bob Johnson}
+
+\copyyear{2026}
+\authoremail{john.doe@example.com}
+
+% Gender example
+\gender{male}
+
+% ------------------------------------------------
+\begin{document}
+
+% =================================================
+% FRONT MATTER
+% =================================================
+\frontmatter
+
+\frontpage
+
+% ---------------- Dedication ---------------------
+\dedication{%
+To all students who choose \LaTeX{} not because it is easy,  
+but because it is correct.
+}
+
+% ---------------- Abstract -----------------------
+\begin{abstractthesis}
+This document provides a complete, copyright-free example of a thesis
+produced using the \texttt{thesis} class.
+It demonstrates the structure, layout, and extensibility of the class,
+including front matter, chapter organization, and typographic conventions.
+All placeholder text is generated using public-domain material.
+\end{abstractthesis}
+
+
+% ---------------- Table of Contents --------------
+\tableofcontents
+
+% =================================================
+% MAIN MATTER
+% =================================================
+\mainmatter
+
+% =================================================
+\chapter{Introduction}
+\section{Background}
+
+\lipsum[1-6]
+
+\section{Motivation}
+\lipsum[7-12]
+
+\subsection{Academic Writing with \LaTeX}
+\lipsum[13-15]
+
+% =================================================
+\chapter{Design of the Thesis Class}
+\section{Class Architecture}
+\lipsum[16-21]
+
+\section{Metadata Management}
+\lipsum[22-26]
+
+\subsection{Validation and Error Handling}
+\lipsum[27-29]
+
+% =================================================
+\chapter{Implementation Details}
+\section{Key--Value Interfaces}
+\lipsum[30-35]
+
+\section{University-Specific Layouts}
+\lipsum[36-40]
+
+\subsection{Extensibility Considerations}
+\lipsum[41-44]
+
+% =================================================
+\chapter{Results and Discussion}
+\section{Visual Consistency}
+\lipsum[45-49]
+
+\section{Usability for Students}
+\lipsum[50-54]
+
+\subsection{Comparison with Standard Classes}
+\lipsum[55-57]
+
+% =================================================
+\chapter{Conclusion}
+\section{Summary}
+\lipsum[58-60]
+
+\section{Future Work}
+\lipsum[61-63]
+
+% =================================================
+% BACK MATTER
+% =================================================
+\backmatter
+
+\chapter*{Final Remarks}
+\addcontentsline{toc}{chapter}{Final Remarks}
+\lipsum[64-66]
+
+
+% ---------------- Acknowledgments ----------------
+\begin{acknowledgements}
+The author would like to thank the open-source \LaTeX{} community for
+providing robust tools for academic writing, and all educators who
+encourage clarity, precision, and reproducibility in scholarly work.
+\end{acknowledgements}
+
+
+\end{document}

@@ -20,7 +20,7 @@
 % Class declaration and option processing
 % ----------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{academicthesis}[2025/12/28]
+\ProvidesClass{academicthesis}[2026/01/01 Unified academic thesis class]
 
 % Options defined in Files/options.tex; anything unknown is forwarded to book
 \input{Files/options}
@@ -63,13 +63,12 @@
 \RequirePackage{keyval}
 \RequirePackage{etoolbox}
 \RequirePackage{fancyhdr}
-%\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{xcolor}
 
 % Drop-cap configuration
 \RequirePackage{type1cm}
 \RequirePackage{lettrine}
-%\renewcommand{\LettrineFontHook}{\color[gray]{0.3}}
+%\renewcommand{\LettrineFontHook}{\color[gray]{0.3}} there are some local definition
 \setcounter{DefaultLines}{3}
 \renewcommand{\LettrineTextFont}{\normalfont}
 \renewcommand{\DefaultLoversize}{0.25}
@@ -86,6 +85,4 @@
 \input{Files/lang}
 \input{Files/formats}
 
-% Optional institution-specific formatting can be loaded here
-%\input{Files/formats/luiss}
-%\newcommand{\prova}{\LIS@luiss}
+
