@@ -23,19 +23,6 @@
 
 % Author Label -----------  Choose the sex of the author
 
-\define@key{general_command}{gender}{%
-  \def\temp{#1}%
-  \def\female{female}%
-  \def\male{male}%
-  \ifx\temp\female
-    \th@femaletrue
-  \else\ifx\temp\male
-    \th@femalefalse
-  \else
-    \PackageError{thesis}{Invalid gender `#1`}{Use gender=male or gender=female}%
-  \fi\fi
-}
-
 \newcommand{\author@label}{%
   \ifth@female
     \myc@CandidateLabelFemale
@@ -73,18 +60,12 @@
 % 2. Master
 % 3. PhD
 
-% Input of university format
+% Input of university format -------
 \InputIfFileExists{Files/formats/\th@uni.tex}{}{%
   \PackageWarning{thesis}{Missing Files/formats/\th@uni.tex; falling back to luiss}%
   \input{Files/formats/luiss.tex}%
 }
 
-
-
-% General Command -----------------------
-\newcommand{\ThesisSettings}[1]{%
-  \setkeys{general_command}{#1}%
-}
 
 % this command is loaded and must be loaded in all the files
 \newcommand{\frontpage}{

@@ -116,8 +116,70 @@
 \newcommand{\CoSupervisor}[1]{\cosupervisor{#1}}
 \newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
 
-% IMPORTANT: remove/disable broken alias if \university is not implemented
-% \newcommand{\University}[1]{\university{#1}} % <- only if \university exists
+
+% ----------------------------------------------------------
+% 3) Gender Case (list logic)
+% ----------------------------------------------------------
+
+\newif\ifth@female
+\th@femalefalse
+
+% map table
+\def\th@gender@female{female}
+\def\th@gender@f{female}
+\def\th@gender@male{male}
+\def\th@gender@m{male}
+
+\newcommand{\th@setgender}[1]{%
+  \edef\th@tmp{\zap@space#1 \@empty}%
+  \lowercase{\edef\th@tmp{\th@tmp}}%
+  \@ifundefined{th@gender@\th@tmp}{%
+    \ClassError{thesis}{Invalid gender `#1`}%
+      {Use male/female (also accepted: m/f).}%
+  }{%
+    \edef\th@tmp{\csname th@gender@\th@tmp\endcsname}%
+    \def\th@cmp{female}%
+    \ifx\th@tmp\th@cmp \th@femaletrue \else \th@femalefalse \fi
+  }%
+}
+
+\newcommand{\gender}[1]{\th@setgender{#1}}
+
+% ----------- Option for a single key command ---------------
+\define@key{thesis}{title}{\thtitle{#1}}
+\define@key{thesis}{subtitle}{\thsubtitle{#1}}
+\define@key{thesis}{candidate}{\candidate{#1}}
+\define@key{thesis}{department}{\department{#1}}
+\define@key{thesis}{degree}{\degree{#1}}
+\define@key{thesis}{chair}{\chair{#1}}
+\define@key{thesis}{academicyear}{\academicyear{#1}}
+\define@key{thesis}{idnumber}{\idnumber{#1}}
+
+\define@key{thesis}{copyyear}{\copyyear{#1}}
+\define@key{thesis}{examdate}{\examdate{#1}}
+\define@key{thesis}{authoremail}{\authoremail{#1}}
+
+\define@key{thesis}{discussiondate}{\discussiondate{#1}}
+\define@key{thesis}{submitteddate}{\submitteddate{#1}}
+\define@key{thesis}{examiner}{\examiner{#1}}
+
+% Comma-separated lists (simple approach)
+\define@key{thesis}{supervisors}{%
+  \th@reset@supervisors
+  \@for\th@tmp:=#1\do{\AddSupervisor{\th@tmp}}%
+}
+\define@key{thesis}{cosupervisors}{%
+  \th@reset@cosupervisors
+  \@for\th@tmp:=#1\do{\AddCoSupervisor{\th@tmp}}%
+}
+
+% Gender defition 
+\define@key{thesis}{gender}{\th@setgender{#1}}
+
+% General command to call for the option ---------
+\newcommand{\thesissetup}[1]{%
+  \setkeys{thesis}{#1}%
+}
 
 
 %------------------------------------------------------
@@ -157,10 +219,17 @@
 
   % Supervisors: if you want at least one supervisor required
   \th@require{\th@supervisors}{\supervisor{Prof. Name}}%
+  
+  % In case the thesis is a master thesis
+  %\th@requireif{\ifth@PhD}{}
 
   % ---- Conditional: only if discussion option is enabled ----
   \th@require@if{\ifth@discussion}{\th@DiscussionDate}{\discussiondate{29 October 2026}}%
   \th@require@if{\ifth@discussion}{\th@ExaminerProfessors}{\examiner{Prof. A\\Prof. B}}%
+  
+  
+  % ----- Mandatory entries for Luiss Front Page ---------
+  %\th@requireif{\if\th@uni
 }
 
 \AtBeginDocument{%

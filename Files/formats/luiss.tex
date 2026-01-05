@@ -1,5 +1,16 @@
-% Package requirements -----
-\RequirePackage{iftex}
+% ------------------------------------------
+% --------- Specific Error Handlign -------
+% ------------------------------------------
+\newcommand{\luiss@check@metadata}{%
+	%\th@require{\th@department}{\department{Your Department}}
+	\th@require{\th@degree}{\degree{Your Degree}}
+	\th@require{\th@chair}{\department{The Chair}}
+}
+
+\AtBeginDocument{%
+	\luiss@check@metadata
+}
+
 
 
 %--------------------------------------------
@@ -30,15 +41,12 @@
 
 \def\luiss@title@align{l}         				% Alignment of title block	
 	
-\def\luiss@course@align{l}        				% Alignment of the Course
-%\def\luiss@chair@align{l}         				% Alignment of the Chair %TODO: merge allignemtn of chair and course
-	
+\def\luiss@course@align{l}        				% Alignment of the Course	
 
 \def\luiss@major{}                				% Major Stire
 \def\luiss@major@align{l}						% Major  
 
 \def\luiss@contentwidth{0.9\textwidth}			% Content width to understand
-
 
 
 
@@ -67,7 +75,6 @@
 
 \define@key{luiss_front}{title-align}{\luiss@setalign{\luiss@title@align}{#1}}
 \define@key{luiss_front}{course-align}{\luiss@setalign{\luiss@course@align}{#1}}
-%\define@key{luiss_front}{chair-align}{\luiss@setalign{\luiss@chair@align}{#1}}
 
 \define@key{luiss_front}{major}{\def\luiss@major{#1}}
 \define@key{luiss_front}{major-align}{\luiss@setalign{\luiss@major@align}{#1}}
