@@ -1,4 +1,4 @@
-# LaTeX Thesis Class
+# LaTeX academicthesis Class
 
 A **scalable and modular LaTeX class** for university theses, designed to support multiple academic levels (**Bachelor, Master, PhD**) and to be easily customizable for different universities, layouts, and languages.
 
@@ -19,7 +19,7 @@ Installation instructions will be provided once the project reaches a stable rel
 Basic example:
 
 ```tex
-\documentclass{thesis}
+\documentclass{academicthesis}
 \begin{document}
 % Your thesis content
 \end{document}
