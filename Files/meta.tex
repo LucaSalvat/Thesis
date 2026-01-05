@@ -1,7 +1,6 @@
-% ----------------------------------------------------------
+% ==========================================================
 % 1) STORAGE (defaults are EMPTY so validation is reliable)
-% ----------------------------------------------------------
-
+% ==========================================================
 \def\th@title{}
 \def\th@subtitle{}
 \def\th@candidate{}
@@ -21,10 +20,9 @@
 \def\th@SubmittedDate{} % fixed spelling
 \def\th@ExaminerProfessors{}
 
-% ----------------------------------------------------------
+% ==========================================================
 % 2) SETTERS (user API)
-% ----------------------------------------------------------
-
+% ==========================================================
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
 \newcommand{\candidate}[1]{\gdef\th@candidate{#1}}
@@ -45,11 +43,10 @@
 % Backward-compatible typo alias (optional)
 \newcommand{\sumbimttedsate}[1]{\submitteddate{#1}} % keep old misspelling working
 
-% ----------------------------------------------------------
+% ==========================================================
 % 3) SUPERVISORS / CO-SUPERVISORS (list logic)
 %    Store empty by default; build a line-broken list.
-% ----------------------------------------------------------
-
+% ==========================================================
 \newcount\th@supervisorcount
 \th@supervisorcount=0
 \gdef\th@supervisors{}%
@@ -117,10 +114,9 @@
 \newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
 
 
-% ----------------------------------------------------------
-% 3) Gender Case (list logic)
-% ----------------------------------------------------------
-
+% ==========================================================
+% 4) Gender Case (list logic)
+% ==========================================================
 \newif\ifth@female
 \th@femalefalse
 
@@ -145,7 +141,9 @@
 
 \newcommand{\gender}[1]{\th@setgender{#1}}
 
-% ----------- Option for a single key command ---------------
+% ==========================================================
+% 5) Single key command interface (thesis={...})
+% ==========================================================
 \define@key{thesis}{title}{\thtitle{#1}}
 \define@key{thesis}{subtitle}{\thsubtitle{#1}}
 \define@key{thesis}{candidate}{\candidate{#1}}
@@ -181,11 +179,9 @@
   \setkeys{thesis}{#1}%
 }
 
-
-%------------------------------------------------------
-% -------- Error Cheks for entries --------------------
-%------------------------------------------------------
-
+% ==========================================================
+% 6) Validation helpers (error checks for entries)
+% ==========================================================
 \newcommand{\th@error}[2]{%
   \ClassError{thesis}{#1}{#2}%
 }
@@ -235,5 +231,4 @@
 \AtBeginDocument{%
   \th@check@metadata
 }
-
 

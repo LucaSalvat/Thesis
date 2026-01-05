@@ -10,32 +10,37 @@
 % version 2008 or later.
 %
 % This work has the LPPL maintenance status `maintained'.
-% 
+%
 % The Current Maintainer of this work is Luca Salvatore.
 %
 % This work consists of the files Thesis.cls and the derived file associated with this file.
 
 
+% ----------------------------------------------------
+% Class declaration and option processing
+% ----------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesis}[2025/12/28]
 
-% ---- options only
+% Options defined in Files/options.tex; anything unknown is forwarded to book
 \input{Files/options}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
-
 \LoadClass{book}
 
+
+% ----------------------------------------------------
+% Engine-aware font and language setup
+% ----------------------------------------------------
 \RequirePackage{iftex}
 
-% pdfTeX -> babel
+% pdfTeX path uses babel; XeTeX/LuaTeX alternative is retained for reference
 %\ifPDFTeX
   \RequirePackage[T1]{fontenc}
   \RequirePackage[utf8]{inputenc}
   \RequirePackage{lmodern}
   \RequirePackage[\th@lang]{babel}
-
-% XeTeX/LuaTeX -> polyglossia
+%
 %\else
 %  \RequirePackage{fontspec} % strongly recommended with polyglossia
 %  \RequirePackage{polyglossia}
@@ -47,6 +52,10 @@
 %  \setmonofont{Latin Modern Mono}
 %\fi
 
+
+% ----------------------------------------------------
+% Core packages for layout and metadata handling
+% ----------------------------------------------------
 \RequirePackage{graphicx}
 \RequirePackage{geometry}
 \RequirePackage{expl3}
@@ -57,7 +66,7 @@
 %\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{xcolor}
 
-% Include the Drop Cap letters
+% Drop-cap configuration
 \RequirePackage{type1cm}
 \RequirePackage{lettrine}
 %\renewcommand{\LettrineFontHook}{\color[gray]{0.3}}
@@ -66,21 +75,17 @@
 \renewcommand{\DefaultLoversize}{0.25}
 \renewcommand{\DefaultLhang}{0.25}
 
-% Betteries of Required packages ------
+% Math utilities
 \RequirePackage{amsmath}
 
 
-% load language strings (safe here)
+% ----------------------------------------------------
+% Load user-facing strings and formatting helpers
+% ----------------------------------------------------
 \input{Files/meta}
 \input{Files/lang}
 \input{Files/formats}
 
-
-
-
-
-
-
-% load formatting commands (safe here)
+% Optional institution-specific formatting can be loaded here
 %\input{Files/formats/luiss}
 %\newcommand{\prova}{\LIS@luiss}
