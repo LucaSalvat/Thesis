@@ -19,7 +19,7 @@ Installation instructions will be provided once the project reaches a stable rel
 Basic example:
 
 ```tex
-\documentclass{<class-name>}
+\documentclass{thesis}
 \begin{document}
 % Your thesis content
 \end{document}
