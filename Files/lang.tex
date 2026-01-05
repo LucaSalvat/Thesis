@@ -1,9 +1,9 @@
-% lang.tex file %
-% ---------------
-%Language defined in options.tex as \th@lang
+% =========================
+% Language loader
+% =========================
+% Language is defined in options.tex as \th@lang
 
-
-% Import of Langauge Folders, in case not presetn import the default one
+% Import language file; fall back to English if missing
 \InputIfFileExists{Files/lang/\th@lang.def}{}{%
   \PackageWarning{thesis}{Missing Files/lang/\th@lang.def; falling back to en}%
   \input{Files/lang/english.def}%

@@ -1,31 +1,31 @@
-% University Choose
-
-\def\th@uni{luiss} % Default One
+% =========================
+% University selection
+% =========================
+\def\th@uni{luiss} % default
 
 \DeclareOption{luiss}{\def\th@uni{luiss}}
-\DeclareOption{lumsa}{\def\th@uni{lumsa}} %example
+\DeclareOption{lumsa}{\def\th@uni{lumsa}} % example
 
 
+% =========================
+% Language selection
+% =========================
+\def\th@lang{english} % default language
 
-% Language Section ---------------------------------
-
-\def\th@lang{english}        % Default Langauge English
-
-% Extended Version
+% Extended keys (lang=xx)
 \DeclareOption{lang=en}{\def\th@lang{english}}
 \DeclareOption{lang=it}{\def\th@lang{italian}}
 \DeclareOption{lang=fr}{\def\th@lang{french}}
 
-
-% Compact Version
+% Compact aliases
 \DeclareOption{english}{\def\th@lang{english}}
 \DeclareOption{italian}{\def\th@lang{italian}}
 \DeclareOption{french}{\def\th@lang{french}}
 
 
-
-% Type of Degree -----------------------------
-
+% =========================
+% Degree type
+% =========================
 \newif\ifth@bachelor
 \newif\ifth@master
 \newif\ifth@phd
@@ -51,13 +51,11 @@
 }
 
 
-
-% Extra -------------
-
-
+% =========================
+% Feature toggles
+% =========================
 % Discussion of Thesis
-\newif\ifth@discussion \th@discussionfalse 
+\newif\ifth@discussion \th@discussionfalse
 \DeclareOption{discussion}{\th@discussiontrue}
-
 
 

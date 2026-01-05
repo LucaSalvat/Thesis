@@ -1,14 +1,15 @@
-
-
-% ---------- Font Dimensions -----------------
+% ==========================================================
+% Font dimensions / sizing helpers
+% ==========================================================
 \newcommand{\TitleFont}{\fontsize{16}{20}\selectfont}
 \newcommand{\SubtitleFont}{\fontsize{14}{18}\selectfont}
 \newcommand{\LowerFont}{\fontsize{12}{14.5}\selectfont}
 
 
 
-% Front Page ------------
-
+% ==========================================================
+% Front-page dispatcher
+% ==========================================================
 \newcommand{\th@FrontPage}{%
   \ifth@bachelor
     \th@FrontPage@bachelor
@@ -21,8 +22,9 @@
   \fi\fi\fi
 }
 
-% Author Label -----------  Choose the sex of the author
-
+% ==========================================================
+% Author label (gender aware)
+% ==========================================================
 \newcommand{\author@label}{%
   \ifth@female
     \myc@CandidateLabelFemale
@@ -32,10 +34,9 @@
 }
 
 
-% Supervisor & CO-sup labels --------------  plural or singular of supervisor
-%\th@supervisor defined in meta
-
-% Supervisor
+% ==========================================================
+% Supervisor & co-supervisor labels (pluralization)
+% ==========================================================
 \newcommand{\th@Supervisor@label}{
     \ifnum\th@supervisorcount>1
         \myc@SupervisorsLabel
@@ -44,7 +45,6 @@
     \fi
 }
 
-% Co-supervisor
 \newcommand{\th@Cosupervisor@label}{%
     \ifnum\th@cosupervisorcount>1
         \myc@CoSupervisorsLabel
@@ -55,19 +55,18 @@
 
 
 
-% For Each University the Class that must be presented are:
-% 1. bachelor
-% 2. Master
-% 3. PhD
-
-% Input of university format -------
+% ==========================================================
+% University format loader
+% ==========================================================
 \InputIfFileExists{Files/formats/\th@uni.tex}{}{%
   \PackageWarning{thesis}{Missing Files/formats/\th@uni.tex; falling back to luiss}%
   \input{Files/formats/luiss.tex}%
 }
 
 
-% this command is loaded and must be loaded in all the files
+% ==========================================================
+% Front page entry point
+% ==========================================================
 \newcommand{\frontpage}{
 	%\begingroup
 	%\@twosidefalse
@@ -77,7 +76,9 @@
 }
 
 
-% Second page presentation ---------
+% ==========================================================
+% Second page presentation
+% ==========================================================
 \newcommand{\Thesis@Discussion}{%
 \myc@ThesisDiscussionBegin \, \th@ExamDate \, \myc@ThesisDiscussionFollowing\linebreak%
 \th@ExaminerProfessors
@@ -127,9 +128,9 @@
 }
 
 
-% ===================== Environment Sections =======================
-% --- Safer names (avoid clashing with built-in abstract env) ---
-% ===================== Front-matter helper =======================
+% ==========================================================
+% Front-matter helpers (safer names to avoid built-in clashes)
+% ==========================================================
 \newcommand{\thesisfrontchapter}[1]{%
   \cleardoublepage
   \thispagestyle{plain}% typical for front matter openers
@@ -138,7 +139,9 @@
   \markboth{#1}{#1}% prevents header leakage
 }
 
-% ===================== Dedication ===============================
+% ----------------------------------------------------------
+% Dedication
+% ----------------------------------------------------------
 \newcommand{\dedication}[1]{%
   \cleardoublepage
   \thispagestyle{empty}%
@@ -147,7 +150,9 @@
   \vspace{\stretch{0.74}}\null
 }
 
-% ===================== Abstract (avoid name clash) ===============
+% ----------------------------------------------------------
+% Abstract (avoid name clash)
+% ----------------------------------------------------------
 \newenvironment{abstractthesis}{%
   \thesisfrontchapter{\myc@AbstractLabel}%
   \noindent\ignorespaces
@@ -155,6 +160,9 @@
   \par\null\ignorespacesafterend
 }
 
+% ----------------------------------------------------------
+% Acknowledgements
+% ----------------------------------------------------------
 \newenvironment{acknowledgements}{%
   \thesisfrontchapter{\myc@AcknowledgmentsLabel}%
   \begingroup
@@ -169,8 +177,9 @@
   %\ignorespacesafterend
 }
 
-% ---- Header and Footer Styles -------
-
+% ==========================================================
+% Header and footer styles
+% ==========================================================
 \fancypagestyle{Thesis}{% Main Style of Thesis
   \fancyhf{}%
   \if@twoside
@@ -210,7 +219,3 @@
 \apptocmd{\tableofcontents}{\cleardoublepage\markboth{}{}\markright{}}{}{}
 
 %\pagestyle{Thesis}
-
-
-
-
