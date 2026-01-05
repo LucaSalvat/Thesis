@@ -20,7 +20,7 @@
 % Class declaration and option processing
 % ----------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{thesis}[2025/12/28]
+\ProvidesClass{academicthesis}[2025/12/28]
 
 % Options defined in Files/options.tex; anything unknown is forwarded to book
 \input{Files/options}
