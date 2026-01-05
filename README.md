@@ -30,12 +30,12 @@ Basic example:
 The license applied is the LPPL
 
 ## Repository Structure
-The class is defined in the main file `Thesis.cls`, which loads all the components required for proper functionality.
+The class is defined in the main file `academicthesis.cls`, which loads all the components required for proper functionality.
 Supporting files are organized within the `Files/ directory`, which contains the core infrastructure of the class.
 
 ### Core files
 
-- `Thesis.cls`  
+- `academicthesis.cls`  
   Main class file.
 
 - `Files/options.tex`  
