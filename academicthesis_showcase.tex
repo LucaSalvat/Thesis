@@ -1,16 +1,20 @@
-\documentclass[luiss,english]{academicthesis}
+\documentclass[luiss,english,oneside]{academicthesis}
 
 \usepackage{lipsum} %Dummy package
 
+\usepackage{hyperref}
 % ------------------------------------------------
 % Metadata (demonstrates your API)
 % ------------------------------------------------
 \thtitle{A Demonstration of the \texttt{academicthesis} Class}
 \thsubtitle{Design, Structure, and Extensibility}
 
+
 \candidate{John Doe}
 \degree{Bachelor of Science in Computer Science}
 \chair{Economics and Data Policy}
+\major{Major: Economics}
+
 \academicyear{2025--2026}
 \idnumber{123456}
 
@@ -22,6 +26,10 @@
 
 % Gender example
 \gender{male}
+
+
+\website{website.org}
+
 
 % ------------------------------------------------
 \begin{document}
@@ -35,13 +43,12 @@
 
 % ---------------- Dedication ---------------------
 \dedication{%
-To all students who choose \LaTeX{} not because it is easy,  
-but because it is correct.
+To all students who choose \LaTeX{} not because it is easy, but because it is correct.
 }
 
 % ---------------- Abstract -----------------------
 \begin{abstractthesis}
-This document provides a complete, copyright-free example of a thesis
+\lettrine{T}{his} document provides a complete, copyright-free example of a thesis
 produced using the \texttt{thesis} class.
 It demonstrates the structure, layout, and extensibility of the class,
 including front matter, chapter organization, and typographic conventions.
@@ -61,7 +68,7 @@ All placeholder text is generated using public-domain material.
 \chapter{Introduction}
 \section{Background}
 
-\lipsum[1-6]
+\lettrine{L}{orem} \lipsum[1-6]
 
 \section{Motivation}
 \lipsum[7-12]
@@ -72,7 +79,7 @@ All placeholder text is generated using public-domain material.
 % =================================================
 \chapter{Design of the Thesis Class}
 \section{Class Architecture}
-\lipsum[16-21]
+\lettrine{N}{ulla} \lipsum[16-21]
 
 \section{Metadata Management}
 \lipsum[22-26]
@@ -120,11 +127,14 @@ All placeholder text is generated using public-domain material.
 \lipsum[64-66]
 
 
+% Here put the bibliography
+
 % ---------------- Acknowledgments ----------------
 \begin{acknowledgements}
 The author would like to thank the open-source \LaTeX{} community for
 providing robust tools for academic writing, and all educators who
 encourage clarity, precision, and reproducibility in scholarly work.
+\lipsum[1-20]
 \end{acknowledgements}
 
 

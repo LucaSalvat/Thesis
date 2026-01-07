@@ -3,8 +3,11 @@
 % ------------------------------------------
 \newcommand{\luiss@check@metadata}{%
 	%\th@require{\th@department}{\department{Your Department}}
-	\th@require{\th@degree}{\degree{Your Degree}}
-	\th@require{\th@chair}{\department{The Chair}}
+	\th@require@if{\ifth@bachelor}{\th@degree}{\degree{Your Degree}}
+	\th@require@if{\ifth@master}{\th@degree}{\degree{Your Degree}}
+	
+	\th@require@if{\ifth@bachelor}{\th@chair}{\department{The Chair}}
+	\th@require@if{\ifth@master}{\th@chair}{\department{The Chair}}
 }
 
 \AtBeginDocument{%
@@ -46,6 +49,8 @@
 \def\luiss@major{}                				% Major Stire
 \def\luiss@major@align{l}						% Major  
 
+\def\luiss@phd_block@align{l}
+
 \def\luiss@contentwidth{0.9\textwidth}			% Content width to understand
 
 
@@ -79,8 +84,12 @@
 \define@key{luiss_front}{major}{\def\luiss@major{#1}}
 \define@key{luiss_front}{major-align}{\luiss@setalign{\luiss@major@align}{#1}}
 
+\define@key{luiss_front}{department-align}{\luiss@setalign{\luiss@phd_block@align}{#1}}
+
 
 % General Command Luiss Definition 
+\newcommand{\major}[1]{\gdef\luiss@major{#1}}
+
 \newcommand{\LuissThesisController}[1]{%
   \setkeys{luiss_front}{#1}%
 }
@@ -140,8 +149,8 @@
     }{\luiss@title@align}%
 }
 
-% Chair and Degree Box -----
-\newcommand{\luiss@major@optional}{
+% Chair and Degree Box (bachelor/ Master)  -----
+\newcommand{\luiss@major@optional}{%
 \ifx\luiss@major\@empty
 \else\luiss@aligned{\luiss@major}{\luiss@major@align}\fi
 }
@@ -157,6 +166,19 @@
 	}{\luiss@course@align}
 }
 
+
+% Cycle and Department (PhD) ---------
+\newcommand{\luiss@Cycle@Department}{%
+	\noindent
+	\luiss@alignedpar{%
+		\LowerFont
+		\myc@DepartmentOf~\th@department
+		\linebreak\linebreak
+		\myc@Phd~\th@phd 
+		\linebreak\vspace*{0.02\textheight}\noindent 		
+		\myc@Cycle~\th@cycle
+	}{\luiss@phd_block@align}
+}
 
 
 % Name Block ------
@@ -271,8 +293,35 @@
 
 \newcommand{\th@FrontPage@phd}{%
   \begin{titlepage}
-    PhD Dissertation\\
-    Candidate: \myc@CandidateLabel
+  	\thispagestyle{empty}
+  	\newgeometry{left=2.75cm, right=2.75cm, top=3cm, bottom=2.5cm}
+  	%Logo Box -------------------
+	\luiss@logobox
+	\vspace{0.1\textheight}
+	
+	% Department and Cycle box ----
+    \luiss@Cycle@Department
+    
+    \vfill
+	% Title box ---------------
+	\luiss@titleblock
+	\vfill
+	
+	% Names block ------------
+	\luiss@namesblock
+	\vspace{0.1\textheight}
+	
+	% Academic year footer ----
+	\noindent
+	\parbox[c]{\textwidth}{\centering%
+      \textbf{\myc@AcademicYear}\par
+      \th@academicyear%
+    }%
+    
+	\vspace*{0.05\textheight}	% bottom padding
+	
+	%General Settings ends
+	\restoregeometry
   \end{titlepage}%
 }
 

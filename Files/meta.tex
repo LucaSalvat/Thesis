@@ -1,19 +1,23 @@
 % ==========================================================
-% 1) STORAGE (defaults are EMPTY so validation is reliable)
+% STORAGE (defaults are EMPTY so validation is reliable)
 % ==========================================================
 \def\th@title{}
 \def\th@subtitle{}
 \def\th@candidate{}
-\def\th@department{}
 \def\th@degree{}
 \def\th@chair{}
 \def\th@academicyear{}
 \def\th@IDNumber{}
+ 
+\def\th@department{}	%PhD
+\def\th@phd{}
+\def\th@cycle{}
 
 % Copyright / contacts
 \def\th@Copyright@Year{}
 \def\th@ExamDate{}
 \def\th@AuthorEmail{}
+\def\th@AuthorWebsite{}
 
 % Discussion / defense
 \def\th@DiscussionDate{}
@@ -21,30 +25,36 @@
 \def\th@ExaminerProfessors{}
 
 % ==========================================================
-% 2) SETTERS (user API)
+% SETTERS (user API)
 % ==========================================================
 \newcommand{\thtitle}[1]{\gdef\th@title{#1}}
 \newcommand{\thsubtitle}[1]{\gdef\th@subtitle{#1}}
 \newcommand{\candidate}[1]{\gdef\th@candidate{#1}}
-\newcommand{\department}[1]{\gdef\th@department{#1}}
 \newcommand{\degree}[1]{\gdef\th@degree{#1}}
 \newcommand{\chair}[1]{\gdef\th@chair{#1}}
 \newcommand{\academicyear}[1]{\gdef\th@academicyear{#1}}
 \newcommand{\idnumber}[1]{\gdef\th@IDNumber{#1}}
 
+\newcommand{\department}[1]{\gdef\th@department{#1}}
+\newcommand{\phd}[1]{\gdef\th@phd{#1}}
+\newcommand{\cycle}[1]{\gdef\th@cycle{#1}}
+
+
 \newcommand{\copyyear}[1]{\gdef\th@Copyright@Year{#1}}
 \newcommand{\examdate}[1]{\gdef\th@ExamDate{#1}}
 \newcommand{\authoremail}[1]{\gdef\th@AuthorEmail{#1}}
+\newcommand{\website}[1]{\gdef\th@AuthorWebsite{#1}}
+
 
 \newcommand{\discussiondate}[1]{\gdef\th@DiscussionDate{#1}}
 \newcommand{\submitteddate}[1]{\gdef\th@SubmittedDate{#1}} % fixed, new canonical name
 \newcommand{\examiner}[1]{\gdef\th@ExaminerProfessors{#1}}
 
 % Backward-compatible typo alias (optional)
-\newcommand{\sumbimttedsate}[1]{\submitteddate{#1}} % keep old misspelling working
+
 
 % ==========================================================
-% 3) SUPERVISORS / CO-SUPERVISORS (list logic)
+% SUPERVISORS / CO-SUPERVISORS (list logic)
 %    Store empty by default; build a line-broken list.
 % ==========================================================
 \newcount\th@supervisorcount
@@ -112,10 +122,12 @@
 \newcommand{\Supervisors}[1]{\supervisors{#1}}
 \newcommand{\CoSupervisor}[1]{\cosupervisor{#1}}
 \newcommand{\CoSupervisors}[1]{\cosupervisors{#1}}
-
+\newcommand{\Website}[1]{\website{#1}}
+\newcommand{\Cycle}[1]{\cycle{#1}}
+\newcommand{\PhD}[1]{\phd{#1}}
 
 % ==========================================================
-% 4) Gender Case (list logic)
+% Gender Case (list logic)
 % ==========================================================
 \newif\ifth@female
 \th@femalefalse
@@ -142,24 +154,32 @@
 \newcommand{\gender}[1]{\th@setgender{#1}}
 
 % ==========================================================
-% 5) Single key command interface (thesis={...})
+% Single key command interface (thesis={...})
 % ==========================================================
 \define@key{thesis}{title}{\thtitle{#1}}
 \define@key{thesis}{subtitle}{\thsubtitle{#1}}
 \define@key{thesis}{candidate}{\candidate{#1}}
-\define@key{thesis}{department}{\department{#1}}
 \define@key{thesis}{degree}{\degree{#1}}
 \define@key{thesis}{chair}{\chair{#1}}
 \define@key{thesis}{academicyear}{\academicyear{#1}}
 \define@key{thesis}{idnumber}{\idnumber{#1}}
 
+\define@key{thesis}{department}{\department{#1}}
+\define@key{thesis}{PhD}{\phd{#1}}
+\define@key{thesis}{cycle}{\cycle{#1}}
+
+
 \define@key{thesis}{copyyear}{\copyyear{#1}}
 \define@key{thesis}{examdate}{\examdate{#1}}
 \define@key{thesis}{authoremail}{\authoremail{#1}}
+\define@key{thesis}{website}{\website{#1}}
+
 
 \define@key{thesis}{discussiondate}{\discussiondate{#1}}
 \define@key{thesis}{submitteddate}{\submitteddate{#1}}
 \define@key{thesis}{examiner}{\examiner{#1}}
+
+
 
 % Comma-separated lists (simple approach)
 \define@key{thesis}{supervisors}{%
@@ -171,7 +191,7 @@
   \@for\th@tmp:=#1\do{\AddCoSupervisor{\th@tmp}}%
 }
 
-% Gender defition 
+% Gender definition 
 \define@key{thesis}{gender}{\th@setgender{#1}}
 
 % General command to call for the option ---------
@@ -180,7 +200,7 @@
 }
 
 % ==========================================================
-% 6) Validation helpers (error checks for entries)
+% Validation helpers (error checks for entries)
 % ==========================================================
 \newcommand{\th@error}[2]{%
   \ClassError{thesis}{#1}{#2}%
@@ -210,21 +230,27 @@
   % ---- Always required (edit to match your university) ----
   \th@require{\th@title}{\thtitle{My Thesis Title}}%
   \th@require{\th@candidate}{\candidate{Your Name}}%
-  \th@require{\th@degree}{\degree{Degree name}}%
   \th@require{\th@academicyear}{\academicyear{20XX-20XX}}%
 
+  
+  \th@require@if{\ifth@bachelor}{\th@degree}{\degree{Degree name}}%
+  \th@require@if{\ifth@master}{\th@degree}{\degree{Degree name}}
+  
+  
   % Supervisors: if you want at least one supervisor required
   \th@require{\th@supervisors}{\supervisor{Prof. Name}}%
   
-  % In case the thesis is a master thesis
-  %\th@requireif{\ifth@PhD}{}
+  % In case the thesis is a PhD thesis
+  \th@require@if{\ifth@phd}{\th@cycle}{\cycle{XXXVI}}					%This is required for now just from luiss
+  \th@require@if{\ifth@phd}{\th@department}{\department{Economics and Finance}}
+  \th@require@if{\ifth@phd}{\th@phd}{\phd{Economics}}
 
   % ---- Conditional: only if discussion option is enabled ----
   \th@require@if{\ifth@discussion}{\th@DiscussionDate}{\discussiondate{29 October 2026}}%
   \th@require@if{\ifth@discussion}{\th@ExaminerProfessors}{\examiner{Prof. A\\Prof. B}}%
   
   
-  % ----- Mandatory entries for Luiss Front Page ---------
+  % ----- Mandatory entries for Front Page ---------
   %\th@requireif{\if\th@uni
 }
 

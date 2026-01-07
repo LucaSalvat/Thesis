@@ -28,6 +28,7 @@ La riproduzione o diffusione, anche parziale, è consentita esclusivamente nei l
 }
 \def\myc@AuthorCopyright{Autore:}
 \def\myc@ContactCopyright{Contatto:}
+\def\myc@website{Sito web:}
 \def\myc@AcknowledgmentsCopyrigth{Elaborato redatto con \LaTeX{} mediante la classe \texttt{Thesis} di Luca Salvatore.}
 
 

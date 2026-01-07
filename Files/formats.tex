@@ -102,7 +102,9 @@
 %TODO: Add the type of thesis
 	
 \myc@AuthorCopyright~\th@candidate\linebreak
-\myc@ContactCopyright~\th@AuthorEmail \linebreak\linebreak
+\myc@ContactCopyright~\th@AuthorEmail 
+\ifundef{\th@AuthorWebsite}{}{\linebreak \myc@website~\th@AuthorWebsite}
+\linebreak\linebreak
 \myc@AcknowledgmentsCopyrigth
 \ignorespacesafterend}
 
@@ -162,7 +164,7 @@
 % Acknowledgements
 % ----------------------------------------------------------
 \newenvironment{acknowledgements}{%
-  \thesisfrontchapter{\myc@AcknowledgmentsLabel}%
+  \chapter*{\myc@AcknowledgmentsLabel}%
   \begingroup
   \pagestyle{acknowledgments}%
   \thispagestyle{plain}%

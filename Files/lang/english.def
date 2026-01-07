@@ -16,6 +16,12 @@
 \def\myc@AcknowledgmentsLabel{Acknowledgments}
 
 
+% PhD Luiss ------
+\def\myc@DepartmentOf{Department of}
+\def\myc@Cycle{Cycle}
+\def\myc@Phd{PhD in}
+
+
 % Thesis Discussion --------
 \def\myc@ThesisDiscussionBegin{The present thesis was publicly discussed on}
 \def\myc@ThesisDiscussionFollowing{before a duly appointed committee composed of:}
@@ -27,6 +33,8 @@ All rights relating to this work are reserved to the author. \linebreak%
 No part of this thesis may be reproduced or distributed, in whole or in part, except as permitted by applicable law.}
 \def\myc@AuthorCopyright{Author:}
 \def\myc@ContactCopyright{Contact:}
+\def\myc@website{Website:}
 \def\myc@AcknowledgmentsCopyrigth{Thesis prepared through \LaTeX{} with the class \texttt{Thesis} by Luca Salvatore.}
+
 
 

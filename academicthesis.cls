@@ -69,7 +69,7 @@
 \RequirePackage{type1cm}
 \RequirePackage{lettrine}
 %\renewcommand{\LettrineFontHook}{\color[gray]{0.3}} there are some local definition
-\setcounter{DefaultLines}{3}
+\setcounter{DefaultLines}{2}
 \renewcommand{\LettrineTextFont}{\normalfont}
 \renewcommand{\DefaultLoversize}{0.25}
 \renewcommand{\DefaultLhang}{0.25}
