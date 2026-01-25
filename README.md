@@ -2,7 +2,7 @@
 
 A **scalable and modular LaTeX class** for university theses, designed to support multiple academic levels (**Bachelor, Master, PhD**) and to be easily customizable for different universities, layouts, and languages.
 
-> [! Important]
+>[!Important]
 > The project present the issue of scalability, as it is designed right now it requires the download of all the docuemnts. This is a problem that must be addressed, would eb delightfull if someone would know how to do it.
 
 ## Features
