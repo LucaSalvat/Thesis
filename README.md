@@ -3,7 +3,7 @@
 A **scalable and modular LaTeX class** for university theses, designed to support multiple academic levels (**Bachelor, Master, PhD**) and to be easily customizable for different universities, layouts, and languages.
 
 >[!Important]
-> The project present the issue of scalability, as it is designed right now it requires the download of all the docuemnts. This is a problem that must be addressed, would eb delightfull if someone would know how to do it.
+> Right now the project as the aim of develop scalability by creating several different packages for each university solving the porblem. Addiitoanlly the next step is to migrate the code with a more robust approach: using the l3key
 
 ## Features
 
