@@ -23,7 +23,12 @@
 \ProvidesClass{academicthesis}[2026/01/01 Unified academic thesis class]
 
 % Options defined in Files/options.tex; anything unknown is forwarded to book
-\input{Files/options}
+% Fail fast with a clear error if the support files are not on TeX's input path.
+\InputIfFileExists{Files/options.tex}{}{%
+  \ClassError{academicthesis}%
+    {Missing Files/options.tex}%
+    {Ensure the Files/ directory is available alongside academicthesis.cls.}%
+}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
 \LoadClass{book}
@@ -81,8 +86,19 @@
 % ----------------------------------------------------
 % Load user-facing strings and formatting helpers
 % ----------------------------------------------------
-\input{Files/meta}
-\input{Files/lang}
-\input{Files/formats}
-
+\InputIfFileExists{Files/meta.tex}{}{%
+  \ClassError{academicthesis}%
+    {Missing Files/meta.tex}%
+    {Ensure the Files/ directory is available alongside academicthesis.cls.}%
+}
+\InputIfFileExists{Files/lang.tex}{}{%
+  \ClassError{academicthesis}%
+    {Missing Files/lang.tex}%
+    {Ensure the Files/ directory is available alongside academicthesis.cls.}%
+}
+\InputIfFileExists{Files/formats.tex}{}{%
+  \ClassError{academicthesis}%
+    {Missing Files/formats.tex}%
+    {Ensure the Files/ directory is available alongside academicthesis.cls.}%
+}
 
